@@ -1,0 +1,144 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #fafaf7;
+  --fg: #222;
+  --fg-muted: rgba(0, 0, 0, 0.5);
+  --fg-faint: rgba(0, 0, 0, 0.25);
+  --accent: #e06b20;
+  --accent-muted: rgba(224, 107, 32, 0.15);
+  --border: rgba(0, 0, 0, 0.06);
+  --code-bg: rgba(0, 0, 0, 0.04);
+  --blockquote: rgba(0, 0, 0, 0.4);
+  --paw: rgba(224, 107, 32, 0.08);
+}
+
+.dark {
+  --bg: #1e1e20;
+  --fg: #d4d4d4;
+  --fg-muted: rgba(212, 212, 212, 0.5);
+  --fg-faint: rgba(212, 212, 212, 0.2);
+  --accent: #f0853f;
+  --accent-muted: rgba(240, 133, 63, 0.15);
+  --border: rgba(255, 255, 255, 0.06);
+  --code-bg: rgba(255, 255, 255, 0.06);
+  --blockquote: rgba(212, 212, 212, 0.35);
+  --paw: rgba(240, 133, 63, 0.08);
+}
+
+html,
+body {
+  font-family: "Newsreader", Georgia, serif;
+  background-color: var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* mono mode — matched visually to serif */
+.mono body,
+.mono {
+  font-family: "IBM Plex Mono", monospace !important;
+  font-size: 15px;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+}
+
+.mono pre,
+.mono code {
+  font-family: "IBM Plex Mono", monospace !important;
+}
+
+h1, h2, h3, h4 {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-muted);
+  text-underline-offset: 3px;
+  transition: color 0.15s;
+}
+
+a:hover {
+  text-decoration-color: var(--accent);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1rem 0;
+}
+
+blockquote {
+  border-left: 2px solid var(--border);
+  padding-left: 1rem;
+  color: var(--blockquote);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e06b20;
+  border-radius: 2px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #f0853f;
+}
+
+/* firefox */
+html {
+  scrollbar-color: #e06b20 transparent;
+  scrollbar-width: thin;
+}
+
+.dark {
+  scrollbar-color: #f0853f transparent;
+}
+
+::selection {
+  background: rgba(224, 107, 32, 0.18);
+  color: inherit;
+}
+
+.dark ::selection {
+  background: rgba(240, 133, 63, 0.22);
+}
+
+/* cat smaller on mobile */
+@media (max-width: 639px) {
+  .neko { width: 32px !important; height: 32px !important; }
+}
+
+/* focus mode */
+.focus-mode *:not(.focus-active) {
+  opacity: 0.5;
+}
+
+.focus-mode .focus-active {
+  opacity: 1;
+  color: #000;
+}
+
+.dark .focus-mode .focus-active {
+  color: #fff;
+  opacity: 1;
+}

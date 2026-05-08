@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://lijuu.me</id>
+  <title>liju thomas</title>
+  <updated>2026-01-01T00:00:00Z</updated>
+  <author>
+    <name>liju thomas</name>
+    <email>lijuthomasliju03@gmail.com</email>
+    <uri>https://lijuu.me</uri>
+  </author>
+  <link rel="alternate" href="https://lijuu.me"/>
+  <link rel="self" href="https://lijuu.me/feed.xml"/>
+  <subtitle>full stack developer. go, typescript, react.</subtitle>
+</feed>
