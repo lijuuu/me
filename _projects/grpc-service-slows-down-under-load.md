@@ -105,3 +105,9 @@ if deadline, ok := ctx.Deadline(); ok {
 - [ ] max concurrent streams configured (server side)
 - [ ] deadline propagation across all services
 - [ ] connection-level metrics (streams active, flow control window available)
+
+## further reading
+
+- [HTTP/2 and the HOL blocking myth](https://en.wikipedia.org/wiki/HTTP/2#Encryption)
+- [gRPC flow control](https://grpc.io/docs/guides/flow-control/)
+- [gRPC keepalive guide](https://grpc.io/docs/guides/keepalive/)

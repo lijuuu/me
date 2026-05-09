@@ -59,7 +59,7 @@ for _, item := range items {
 
 this limits concurrency to GOMAXPROCS. for CPU-bound work, this is optimal. for I/O-bound work, you can go higher but should still cap it.
 
-**reference**: [how to handle a million websockets in go](https://www.freecodecamp.org/news/million-websockets-and-go/) — sergey kamardin
+**reference**: [gobwas/ws](https://github.com/gobwas/ws) — sergey kamardin's zero-allocation websocket library
 
 ## alternatives worth knowing
 
@@ -79,3 +79,9 @@ this limits concurrency to GOMAXPROCS. for CPU-bound work, this is optimal. for 
 | > 1m | you probably need a different architecture |
 
 goroutines are cheap. they are not free. at scale, everything costs something.
+
+## further reading
+
+- [go scheduler: Ms, Ps, and Gs](https://www.youtube.com/watch?v=YHRO5WQGh0k)
+- [go memory management — official GC guide](https://go.dev/doc/gc-guide)
+- [gobwas/ws — zero-allocation websocket library](https://github.com/gobwas/ws)

@@ -111,3 +111,9 @@ srv := &http.Server{
 - [ ] readiness probe fails during shutdown (so no new traffic)
 - [ ] preStop hook calls drain endpoint with enough buffer
 - [ ] keepalive timeouts set appropriately
+
+## further reading
+
+- [kubernetes pod lifecycle](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
+- [why your go app doesn't handle SIGTERM](https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86)
+- [pod disruption budgets](https://kubernetes.io/docs/tasks/run-application/configure-pdb/)

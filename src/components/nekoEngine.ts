@@ -1,4 +1,16 @@
 // minimal neko engine — chase cursor only
+
+const EDGE_MARGIN = 32;
+const SPRITE_SIZE = 64;
+const MOUSE_OFFSET = 30;
+const SPRITE_CENTER_X = 16;
+const SPRITE_CENTER_Y = 31;
+const TICK_INCREMENT = 5;
+const TICK_WRAP = 9999;
+const RANDOM_THRESHOLD = 20;
+const SIN_22_5 = 0.382683;
+const SIN_67_5 = 0.92388;
+
 class NekoEngine {
   el: HTMLElement; img: HTMLImageElement; sprites: string[] = [];
   fps = 120; speed = 24; idleThresh = 6;
@@ -15,19 +27,20 @@ class NekoEngine {
   constructor(opts: any = {}) {
     this.fps = opts.fps || 120; this.speed = opts.speed || 24;
     this.idleThresh = opts.idleThreshold || 6;
-    this.bw = document.documentElement.clientWidth - 32;
-    this.bh = window.innerHeight - 32;
+    this.bw = document.documentElement.clientWidth - EDGE_MARGIN;
+    this.bh = window.innerHeight - EDGE_MARGIN;
     this.el = document.createElement("div");
-    this.el.style.cssText = `position:fixed;width:64px;height:64px;image-rendering:pixelated;pointer-events:none;z-index:999999;left:${this.x}px;top:${this.y}px;margin:0;padding:0;border:none;background:transparent;user-select:none`;
+    this.el.className = "neko";
+    this.el.style.cssText = `position:fixed;width:${SPRITE_SIZE}px;height:${SPRITE_SIZE}px;image-rendering:pixelated;pointer-events:none;z-index:999999;left:${this.x}px;top:${this.y}px;margin:0;padding:0;border:none;background:transparent;user-select:none`;
     this.img = document.createElement("img");
     this.img.style.cssText = "width:100%;height:100%;background:transparent;border:none;margin:0;padding:0;max-width:none;display:block;user-select:none;-webkit-user-drag:none;pointer-events:none";
     this.el.appendChild(this.img);
     document.body.appendChild(this.el);
     document.addEventListener("mousemove", (e: MouseEvent) => { this.mx = e.clientX; this.my = e.clientY; this.hasMouse = true; });
-    window.addEventListener("resize", () => { this.bw = document.documentElement.clientWidth - 32; this.bh = window.innerHeight - 32; });
+    window.addEventListener("resize", () => { this.bw = document.documentElement.clientWidth - EDGE_MARGIN; this.bh = window.innerHeight - EDGE_MARGIN; });
     this.x = Math.random() * this.bw; this.y = Math.random() * this.bh;
     this.lx = this.x; this.ly = this.y; this.plx = this.x; this.ply = this.y;
-    this.tx = this.x + 16; this.ty = this.y + 31; this.otx = this.tx; this.oty = this.ty;
+    this.tx = this.x + SPRITE_CENTER_X; this.ty = this.y + SPRITE_CENTER_Y; this.otx = this.tx; this.oty = this.ty;
   }
   setSprites(s: string[]) { this.sprites = s; this.updateSprite(); }
   updateSprite() {
@@ -40,10 +53,10 @@ class NekoEngine {
   stop() { this.running = false; if (this.iv) { clearInterval(this.iv); this.iv = null; } }
   destroy() { this.stop(); if (this.el.parentNode) this.el.parentNode.removeChild(this.el); }
   update() {
-    this.tickAcc += 5 / this.fps;
+    this.tickAcc += TICK_INCREMENT / this.fps;
     while (this.tickAcc >= 1) {
       this.tickAcc -= 1; this.plx = this.lx; this.ply = this.ly;
-      this.tick++; if (this.tick >= 9999) this.tick = 0;
+      this.tick++; if (this.tick >= TICK_WRAP) this.tick = 0;
       if (this.tick % 2 === 0) this.stateCnt++;
       this.chaseMouse();
       this.updateSprite();
@@ -55,12 +68,12 @@ class NekoEngine {
     this.el.style.top = Math.round(this.y) + "px";
   }
   chaseMouse() {
-    if (!this.hasMouse) { this.runTo(this.lx + 16, this.ly + 31); return; }
-    this.runTo(this.mx! - 30, this.my! - 30);
+    if (!this.hasMouse) { this.runTo(this.lx + SPRITE_CENTER_X, this.ly + SPRITE_CENTER_Y); return; }
+    this.runTo(this.mx! - MOUSE_OFFSET, this.my! - MOUSE_OFFSET);
   }
   runTo(tx: number, ty: number) {
     this.otx = this.tx; this.oty = this.ty; this.tx = tx; this.ty = ty;
-    const xd = tx - this.lx - 16; const yd = ty - this.ly - 31;
+    const xd = tx - this.lx - SPRITE_CENTER_X; const yd = ty - this.ly - SPRITE_CENTER_Y;
     const d = Math.sqrt(xd * xd + yd * yd);
     if (d === 0) { this.dx = 0; this.dy = 0; }
     else if (d <= this.speed) { this.dx = Math.trunc(xd); this.dy = Math.trunc(yd); }
@@ -73,7 +86,7 @@ class NekoEngine {
       case 2: if (ms) this.setState(5); else if (this.stateCnt >= 4) this.setState(3); break;
       case 3: if (ms) this.setState(5); else if (this.stateCnt >= 3) this.setState(4); break;
       case 4: if (ms) this.setState(5); break;
-      case 5: if (this.stateCnt >= 3 + Math.floor(Math.random()*20)) this.setDir(); break;
+      case 5: if (this.stateCnt >= 3 + Math.floor(Math.random()*RANDOM_THRESHOLD)) this.setDir(); break;
       case 6:case 7:case 8:case 9:case 10:case 11:case 12:case 13: {
         let nx = this.lx + this.dx; let ny = this.ly + this.dy;
         const wasOut = nx <= 0 || nx >= this.bw || ny <= 0 || ny >= this.bh;
@@ -88,7 +101,7 @@ class NekoEngine {
   setDir() {
     if (this.dx === 0 && this.dy === 0) { this.setState(0); return; }
     const lx = this.dx; const ly = -this.dy; const l = Math.sqrt(lx*lx+ly*ly);
-    const s = ly / l; const sp8 = 0.382683; const s3p8 = 0.92388;
+    const s = ly / l; const sp8 = SIN_22_5; const s3p8 = SIN_67_5;
     let ns: number;
     if (this.dx > 0) {
       if (s > s3p8) ns = 6; else if (s > sp8) ns = 11; else if (s > -sp8) ns = 9; else if (s > -s3p8) ns = 13; else ns = 7;

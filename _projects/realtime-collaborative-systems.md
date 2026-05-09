@@ -77,7 +77,7 @@ user A hits undo
 
 does user A's undo remove "hello"? " world"? everything? the answer depends on whether undo is local (removes own operations), global (removes most recent), or scope-based.
 
-**reference**: [undo in collaborative editing](https://cpsc.yale.edu/sites/default/files/files/tr1500.pdf) — yale research on undo models
+**reference**: [undo in collaborative editing](https://en.wikipedia.org/wiki/Operational_transformation) — see section on undo in collaborative editors
 
 ### 3. network partitions
 
@@ -129,7 +129,7 @@ solutions:
 - uses a custom sync engine built on CRDT principles
 - focuses on structured data (issues, projects) rather than freeform text
 - treats the entire workspace as a collaborative document
-- **reference**: [linear's sync engine](https://linear.app/blog/the-tech-behind-linear)
+- [linear's engineering blog](https://linear.app/blog)
 
 ## libraries worth exploring
 

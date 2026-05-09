@@ -112,3 +112,9 @@ func BoundedLoad(key string, maxLoad float64) string {
 ```
 
 this prevents hot spots when servers join/leave.
+
+## further reading
+
+- [consistent hashing paper (karger et al.)](https://www.cs.princeton.edu/courses/archive/fall07/cos518/papers/chash.pdf)
+- [how discord shards guilds](https://discord.com/blog/how-discord-handles-millions-of-concurrent-connections)
+- [consistent hashing with bounded loads](https://arxiv.org/abs/1608.01350)

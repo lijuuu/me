@@ -37,7 +37,7 @@ func runIfLeader(fencingToken int64) {
 }
 ```
 
-**reference**: [leader election with etcd](https://etcd.io/docs/latest/tutorials/how-to-create-leases/)
+**reference**: [leader election with etcd](https://etcd.io/docs/v3.5/tutorials/how-to-create-lease/)
 
 ## the clock drift death trap
 
@@ -98,3 +98,9 @@ single-machine cron: easy to monitor (check exit code). distributed cron: how do
 | custom | you build it | depends | high |
 
 **reference**: [kubernetes cronjob docs](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)
+
+## further reading
+
+- [leader election with etcd](https://etcd.io/docs/v3.5/tutorials/how-to-create-lease/)
+- [designing distributed cron at airbnb](https://medium.com/airbnb-engineering/avoiding-double-payments-in-a-distributed-payments-system-2981f6b070bb)
+- [kubernetes cronjob docs](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)

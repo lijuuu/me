@@ -56,7 +56,7 @@ const CAT_SPRITES = [
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA10lEQVR4nO2UUQ7EIAhEYbP3vzL7wxo6IqKpadIwSWNKlXmClahUKpVKpbMSfYb6nDQXCb1vARg5zJ1vABAYrx919zoOgb6bpi05M4cGsJYxmK2AkPYUdnYZMYawHmhH5JljQmbuTLQSrrldo/Oa7wwgZZ7VH9L6nvwNU3oKoJUwAkhdJBmZ0nftW66AOUjEzO2JzKONrN4DHYw18mKBuRARb50BWwUbw7gHg1Dbh9CDsKbYptH85XugSxD03wOC98lqzRElngFZQ4TJAqShLEdi3q73y/QDzYaO9US4bAEAAAAASUVORK5CYII=",
 ];
 
-const Cat = () => {
+export default function Cat() {
   const ref = useRef<NekoEngine | null>(null);
   const pawRef = useRef("");
   const lastPrintRef = useRef(0);
@@ -65,8 +65,24 @@ const Cat = () => {
     pawRef.current = makePawPrint();
     const engine = new NekoEngine({ speed: 24, fps: 120, behaviorMode: 0, idleThreshold: 6, allowBehaviorChange: false });
     engine.setSprites(CAT_SPRITES);
-    engine.start();
     ref.current = engine;
+
+    if (document.documentElement.hasAttribute("data-cat-hidden")) {
+      engine.el.style.display = "none";
+    } else {
+      engine.start();
+    }
+    const observer = new MutationObserver(() => {
+      if (!engine.el) return;
+      if (document.documentElement.hasAttribute("data-cat-hidden")) {
+        engine.stop();
+        engine.el.style.display = "none";
+      } else {
+        engine.el.style.display = "";
+        engine.start();
+      }
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-cat-hidden"] });
 
     // easter egg: after 15s idle → cat runs to toggle, wall-scratches, runs back, sleeps (once)
     let phaseTimer: ReturnType<typeof setTimeout>;
@@ -88,6 +104,7 @@ const Cat = () => {
     // after 15s idle, regardless of cat state: wake, run to toggle, play, run back, sleep
     const idleWatcher = setInterval(() => {
       if (busy || played) return;
+      if (document.documentElement.hasAttribute("data-cat-hidden")) return;
       if (Date.now() - lastActivity < 15000) return;
 
       busy = true;
@@ -147,6 +164,11 @@ const Cat = () => {
 
       const now = Date.now();
 
+      if (document.documentElement.hasAttribute("data-cat-hidden") || !eng.running) {
+        requestAnimationFrame(trailLoop);
+        return;
+      }
+
       if (now - lastPrintRef.current > 80 && (Math.abs(eng.x - eng.plx) > 0.5 || Math.abs(eng.y - eng.ply) > 0.5)) {
         lastPrintRef.current = now;
         // paw print — more visible, fades over distance and time
@@ -183,6 +205,7 @@ const Cat = () => {
 
     const raf = requestAnimationFrame(trailLoop);
     return () => {
+      observer.disconnect();
       cancelAnimationFrame(raf);
       abort();
       document.removeEventListener("mousemove", onActivity);
@@ -192,6 +215,4 @@ const Cat = () => {
   }, []);
 
   return null;
-};
-
-export default Cat;
+}

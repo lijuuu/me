@@ -135,3 +135,9 @@ without priorities, a flood of low-priority jobs blocks critical ones. implement
 ```
 
 postgres for durability, worker pool for throughput, DLQ for failures. simple, reliable, observable.
+
+## further reading
+
+- [the outbox pattern](https://microservices.io/patterns/data/transactional-outbox.html)
+- [temporal workflow engine](https://docs.temporal.io/)
+- [listen/notify in postgres](https://www.postgresql.org/docs/current/sql-notify.html)

@@ -1,9 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import FocusMode from "./FocusMode";
+import CatToggle from "./CatToggle";
 
 export default function ThemeToggle() {
   const [dark, setDark] = useState(false);
   const [serif, setSerif] = useState(true);
+  const serifRef = useRef(serif);
+  serifRef.current = serif;
+  const darkRef = useRef(dark);
+  darkRef.current = dark;
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
@@ -36,6 +41,30 @@ export default function ThemeToggle() {
     }
   };
 
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement || e.target instanceof HTMLElement && e.target.isContentEditable) return;
+      if (e.key === "m") {
+        const next = !serifRef.current;
+        setSerif(next);
+        localStorage.setItem("font", next ? "" : "mono");
+        if (next) {
+          document.documentElement.classList.remove("mono");
+        } else {
+          document.documentElement.classList.add("mono");
+        }
+      }
+      if (e.key === "t") {
+        const next = !darkRef.current;
+        setDark(next);
+        localStorage.setItem("theme", next ? "dark" : "light");
+        document.documentElement.classList.toggle("dark", next);
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
+
   return (
     <div className="fixed top-4 right-4 z-50 flex gap-3 lowercase">
       <button
@@ -50,6 +79,7 @@ export default function ThemeToggle() {
       >
         {dark ? "light" : "dark"}
       </button>
+      <CatToggle />
       <FocusMode />
     </div>
   );

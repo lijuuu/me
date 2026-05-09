@@ -4,6 +4,7 @@ import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { Link } from "react-router-dom";
 import { getProjects, type Project } from "../data/projects";
+import { SITE } from "../data/site";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -30,22 +31,28 @@ export default function Home() {
     <main className="relative z-10 max-w-screen-md px-6 sm:px-8 py-16 flex flex-col gap-12">
       <header className="flex flex-col gap-3">
         <h1 className="text-xl font-semibold lowercase tracking-tight text-[#222] dark:text-[#d4d4d4]">
-          liju thomas
+          {SITE.name}
         </h1>
-        <p className="text-sm lowercase text-black/55 dark:text-white/45 leading-relaxed">
-          <i>swe at <a href="https://aion.xyz" target="_blank" rel="noopener noreferrer">aion.xyz</a></i> &middot; generalist
+        <p className="text-xs lowercase text-black/55 dark:text-white/45 leading-relaxed">
+          <i>{SITE.title}</i>
+          <br />
+          <i>swe at <a href={SITE.links.work.href} target="_blank" rel="noopener noreferrer">{SITE.links.work.text}</a> | bangalore · 2025&ndash;ongoing</i>
+          <br />
+          <i>intern at <a href={SITE.links.internship.href} target="_blank" rel="noopener noreferrer">{SITE.links.internship.text}</a> | kochi · 2024&ndash;2025</i>
         </p>
         <p className="text-xs lowercase text-black/35 dark:text-white/25 leading-relaxed max-w-md">
-          go, distributed systems, react, typescript, k8s, docker, observability. used to write smart contracts. drawn to cybersec. highly minimalist.
+          {SITE.bio}
         </p>
         <p className="text-sm lowercase text-black/30 dark:text-white/25">
-          kalladikode, kerala, india · currently at bangalore · <ISTClock />
+          {SITE.location} · <ISTClock />
         </p>
         <nav className="flex gap-4 text-[12px] text-black/25 dark:text-white/25 lowercase">
-          <a href="https://github.com/lijuuu" target="_blank" rel="noopener noreferrer">github</a>
-          <a href="https://www.linkedin.com/in/liju-thomas-13ba6524b/" target="_blank" rel="noopener noreferrer">linkedin</a>
-          <a href="https://twitter.com/_lijuuu" target="_blank" rel="noopener noreferrer">twitter</a>
-          <a href="mailto:lijuthomasliju03@gmail.com">email</a>
+          <a href={SITE.links.github} target="_blank" rel="noopener noreferrer">github</a>
+          <a href={SITE.links.linkedin} target="_blank" rel="noopener noreferrer">linkedin</a>
+          <a href={SITE.links.twitter} target="_blank" rel="noopener noreferrer">twitter</a>
+          <a href={SITE.links.instagram} target="_blank" rel="noopener noreferrer">instagram</a>
+          <a href={SITE.links.email}>email</a>
+          <Link to="/cv" className="text-[#e06b20]/40 dark:text-[#f0853f]/40 hover:text-[#e06b20] dark:hover:text-[#f0853f]">cv</Link>
           <a href="/feed.xml" className="text-[#e06b20]/40 dark:text-[#f0853f]/40 hover:text-[#e06b20] dark:hover:text-[#f0853f]">rss</a>
         </nav>
       </header>

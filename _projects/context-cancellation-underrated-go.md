@@ -148,3 +148,9 @@ func fanOut(ctx context.Context, items []Item) []Result {
 context isn't flashy. but it's the difference between a system that gracefully degrades and one that leaks goroutines until it OOMs.
 
 **reference**: [http.Server shutdown](https://pkg.go.dev/net/http#Server.Shutdown) — graceful HTTP server shutdown using context deadlines to drain connections
+
+## further reading
+
+- [context package documentation](https://pkg.go.dev/context)
+- [errgroup — goroutine group with integrated context](https://pkg.go.dev/golang.org/x/sync/errgroup)
+- [context in database/sql](https://pkg.go.dev/database/sql#DB.QueryContext)

@@ -137,4 +137,10 @@ if errorRate > 0.5 {
 if runtime.NumGoroutine() > 10000 {
     w.WriteHeader(503)  // leaking goroutines
 }
+
+## further reading
+
+- [kubernetes pod lifecycle probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
+- [health check patterns for distributed systems](https://microservices.io/patterns/observability/health-check-api.html)
+- [designing better readiness probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-readiness-probes)
 ```

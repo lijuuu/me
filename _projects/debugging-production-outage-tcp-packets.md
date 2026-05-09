@@ -105,3 +105,9 @@ add these to monitoring:
 - **packet loss ratio** from instance perspective
 
 and always test from outside the VPC. monitoring needs the same view as external users.
+
+## further reading
+
+- [tcpdump advanced usage](https://danielmiessler.com/study/tcpdump/)
+- [conntrack — the hidden killer](https://thermalcircle.de/doku.php?id=blog:linux:netfilter_conntrack_performance)
+- [wireshark display filters](https://wiki.wireshark.org/DisplayFilters)

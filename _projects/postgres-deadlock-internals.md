@@ -124,3 +124,9 @@ ALTER SYSTEM SET deadlock_timeout = '1s';
 | 10s | low CPU | transactions stuck for 10s |
 
 tune based on your transaction patterns. OLTP with many short transactions: shorter timeout. batch processing: longer is fine.
+
+## further reading
+
+- [postgres explicit locking](https://www.postgresql.org/docs/current/explicit-locking.html)
+- [postgres deadlock detection code](https://github.com/postgres/postgres/blob/master/src/backend/storage/lmgr/deadlock.c)
+- [postgres lock monitoring](https://wiki.postgresql.org/wiki/Lock_Monitoring)

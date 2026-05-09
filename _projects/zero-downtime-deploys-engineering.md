@@ -80,3 +80,9 @@ if service A deploys a new API version while service B still calls the old versi
 | recreate | yes | none | redeploy | any |
 
 **reference**: [kubernetes deployment strategies](https://github.com/ContainerSolutions/k8s-deployment-strategies)
+
+## further reading
+
+- [expand and contract pattern](https://www.prisma.io/dataguide/types/relational/expand-and-contract-pattern)
+- [graceful shutdown of a tcp server in go](https://eli.thegreenplace.net/2020/graceful-shutdown-of-a-tcp-server-in-go/)
+- [kubernetes DNS tuning](https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/)

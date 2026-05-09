@@ -129,3 +129,9 @@ each layer has its own backpressure mechanism. if any layer lacks it, the system
 > "don't accept work you can't process. tell your caller to slow down."
 
 backpressure isn't a performance problem. it's a stability requirement. a system that accepts infinite work is a system that will eventually crash.
+
+## further reading
+
+- [TCP flow control](https://en.wikipedia.org/wiki/Transmission_Control_Protocol#Flow_control)
+- [RFC 6585 — 429 Too Many Requests](https://datatracker.ietf.org/doc/html/rfc6585)
+- [reactive streams specification](https://www.reactive-streams.org/)

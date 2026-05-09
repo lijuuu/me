@@ -131,3 +131,9 @@ even after `git reset --hard`, the old commits still exist in the object store. 
 | safety | immutable objects, reflog, garbage collection delay |
 
 the secret: git is simple underneath. understanding the object model makes everything — rebase, cherry-pick, bisect, reflog — make sense.
+
+## further reading
+
+- [git internals — git objects](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects)
+- [git packfiles](https://git-scm.com/docs/pack-format)
+- [a successful git branching model](https://nvie.com/posts/a-successful-git-branching-model/)

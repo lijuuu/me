@@ -22,6 +22,61 @@ they do NOT share:
 
 **reference**: [kubernetes pod overview](https://kubernetes.io/docs/concepts/workloads/pods/)
 
+<div class="my-4">
+  <!-- light -->
+  <svg width="440" height="240" viewBox="0 0 440 240" xmlns="http://www.w3.org/2000/svg" class="dark:hidden">
+    <defs>
+      <marker id="la" viewBox="0 0 6 6" refX="6" refY="3" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ea580c"/></marker>
+    </defs>
+    <rect x="10" y="10" width="420" height="220" rx="12" fill="none" stroke="#ea580c" stroke-width="2" stroke-dasharray="6,3"/>
+    <text x="30" y="34" font-family="monospace" font-size="10" fill="#9a3412" font-weight="600">POD — shared NET + IPC namespace</text>
+    <rect x="30" y="48" width="150" height="88" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <text x="105" y="68" font-family="monospace" font-size="11" fill="#7c2d12" text-anchor="middle" font-weight="bold">pause container</text>
+    <line x1="45" y1="78" x2="165" y2="78" stroke="#ea580c" stroke-width="0.5" opacity="0.6"/>
+    <text x="48" y="92" font-family="monospace" font-size="9" fill="#c2410c" font-weight="500">shared NET namespace</text>
+    <text x="48" y="106" font-family="monospace" font-size="9" fill="#c2410c" font-weight="500">shared IPC namespace</text>
+    <text x="48" y="120" font-family="monospace" font-size="9" fill="#9a3412" opacity="0.6">shared PID namespace</text>
+    <path d="M180 92 L200 92 L200 80 L218 80" stroke="#ea580c" stroke-width="1.2" fill="none" marker-end="url(#la)"/>
+    <path d="M180 92 L200 92 L200 128 L218 128" stroke="#ea580c" stroke-width="1.2" fill="none" marker-end="url(#la)"/>
+    <rect x="225" y="48" width="185" height="70" rx="7" fill="#fafafa" stroke="#d4d4d8" stroke-width="1.2"/>
+    <text x="317" y="66" font-family="monospace" font-size="10" fill="#27272a" text-anchor="middle" font-weight="bold">app container</text>
+    <line x1="240" y1="74" x2="395" y2="74" stroke="#d4d4d8" stroke-width="0.5" opacity="0.6"/>
+    <text x="240" y="88" font-family="monospace" font-size="8" fill="#52525b">own MNT · own UTS namespace</text>
+    <text x="240" y="103" font-family="monospace" font-size="8" fill="#c2410c" font-weight="500">joins NET + IPC from pause</text>
+    <rect x="225" y="133" width="185" height="70" rx="7" fill="#fafafa" stroke="#d4d4d8" stroke-width="1.2"/>
+    <text x="317" y="151" font-family="monospace" font-size="10" fill="#27272a" text-anchor="middle" font-weight="bold">sidecar container</text>
+    <line x1="240" y1="159" x2="395" y2="159" stroke="#d4d4d8" stroke-width="0.5" opacity="0.6"/>
+    <text x="240" y="173" font-family="monospace" font-size="8" fill="#52525b">own MNT · own UTS namespace</text>
+    <text x="240" y="188" font-family="monospace" font-size="8" fill="#c2410c" font-weight="500">joins NET + IPC from pause</text>
+  </svg>
+  <!-- dark -->
+  <svg width="440" height="240" viewBox="0 0 440 240" xmlns="http://www.w3.org/2000/svg" class="hidden dark:block">
+    <defs>
+      <marker id="da" viewBox="0 0 6 6" refX="6" refY="3" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#f0853f"/></marker>
+    </defs>
+    <rect x="10" y="10" width="420" height="220" rx="12" fill="none" stroke="#f0853f" stroke-width="2" stroke-dasharray="6,3"/>
+    <text x="30" y="34" font-family="monospace" font-size="10" fill="#fb923c" font-weight="600">POD — shared NET + IPC namespace</text>
+    <rect x="30" y="48" width="150" height="88" rx="8" fill="#431407" stroke="#f0853f" stroke-width="2"/>
+    <text x="105" y="68" font-family="monospace" font-size="11" fill="#fb923c" text-anchor="middle" font-weight="bold">pause container</text>
+    <line x1="45" y1="78" x2="165" y2="78" stroke="#f0853f" stroke-width="0.5" opacity="0.6"/>
+    <text x="48" y="92" font-family="monospace" font-size="9" fill="#f0853f" font-weight="500">shared NET namespace</text>
+    <text x="48" y="106" font-family="monospace" font-size="9" fill="#f0853f" font-weight="500">shared IPC namespace</text>
+    <text x="48" y="120" font-family="monospace" font-size="9" fill="#fb923c" opacity="0.6">shared PID namespace</text>
+    <path d="M180 92 L200 92 L200 80 L218 80" stroke="#f0853f" stroke-width="1.2" fill="none" marker-end="url(#da)"/>
+    <path d="M180 92 L200 92 L200 128 L218 128" stroke="#f0853f" stroke-width="1.2" fill="none" marker-end="url(#da)"/>
+    <rect x="225" y="48" width="185" height="70" rx="7" fill="#18181b" stroke="#52525b" stroke-width="1.2"/>
+    <text x="317" y="66" font-family="monospace" font-size="10" fill="#d4d4d8" text-anchor="middle" font-weight="bold">app container</text>
+    <line x1="240" y1="74" x2="395" y2="74" stroke="#52525b" stroke-width="0.5" opacity="0.6"/>
+    <text x="240" y="88" font-family="monospace" font-size="8" fill="#a1a1aa">own MNT · own UTS namespace</text>
+    <text x="240" y="103" font-family="monospace" font-size="8" fill="#f0853f" font-weight="500">joins NET + IPC from pause</text>
+    <rect x="225" y="133" width="185" height="70" rx="7" fill="#18181b" stroke="#52525b" stroke-width="1.2"/>
+    <text x="317" y="151" font-family="monospace" font-size="10" fill="#d4d4d8" text-anchor="middle" font-weight="bold">sidecar container</text>
+    <line x1="240" y1="159" x2="395" y2="159" stroke="#52525b" stroke-width="0.5" opacity="0.6"/>
+    <text x="240" y="173" font-family="monospace" font-size="8" fill="#a1a1aa">own MNT · own UTS namespace</text>
+    <text x="240" y="188" font-family="monospace" font-size="8" fill="#f0853f" font-weight="500">joins NET + IPC from pause</text>
+  </svg>
+</div>
+
 ## the pause container
 
 every pod has a hidden container called the **pause container** (or sandbox container). it was historically `k8s.gcr.io/pause`, now often `registry.k8s.io/pause`. it does almost nothing — it literally runs `pause()` in a loop.
@@ -137,19 +192,34 @@ firecracker: microVM (AWS Lambda/Fargate uses this)
 
 ## pod lifecycle: step by step
 
-```
-1. kubectl sends pod spec to API server
-2. API server validates and stores in etcd
-3. Scheduler watches for unscheduled pods
-4. Scheduler picks a node (filter -> score -> bind)
-5. Kubelet on the node watches for assigned pods
-6. Kubelet calls CRI: create pause container
-7. Kubelet calls CNI: set up network namespace
-8. Kubelet calls CRI: create init containers (run serially)
-9. Kubelet calls CRI: create app containers (run in parallel)
-10. Kubelet starts liveness/readiness probes
-11. Pod status -> Running
-```
+<div class="flex flex-wrap items-center gap-x-1 gap-y-1 my-4 text-[11px] leading-tight">
+  <span class="border border-[#c2410c] dark:border-[#f0853f] rounded-full px-2 py-0.5 bg-[#e06b20]/[0.1] dark:bg-[#f0853f]/[0.12] text-[#9a3412] dark:text-[#fb923c] font-semibold">kubectl</span>
+  <span class="text-black/55 dark:text-white/45 mx-0.5 font-medium">→</span>
+  <span class="border border-red-500 dark:border-red-400 rounded-full px-2 py-0.5 bg-red-50 dark:bg-red-950 text-red-600 dark:text-red-400 font-semibold">API Server</span>
+  <span class="text-black/55 dark:text-white/45 mx-0.5 font-medium">→</span>
+  <span class="border border-amber-500 dark:border-amber-400 rounded-full px-2 py-0.5 bg-amber-50 dark:bg-amber-950 text-amber-600 dark:text-amber-400 font-semibold">etcd</span>
+  <span class="text-black/55 dark:text-white/45 mx-0.5 font-medium">⇢</span>
+  <span class="border border-emerald-500 dark:border-emerald-400 rounded-full px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 font-semibold">Scheduler</span>
+  <span class="text-black/55 dark:text-white/45 mx-0.5 font-medium">→</span>
+  <span class="border border-blue-500 dark:border-blue-400 rounded-full px-2 py-0.5 bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400 font-semibold">Kubelet</span>
+  <span class="text-black/55 dark:text-white/45 mx-0.5 font-medium">→</span>
+  <span class="border border-violet-500 dark:border-violet-400 rounded-full px-2 py-0.5 bg-violet-50 dark:bg-violet-950 text-violet-600 dark:text-violet-400 font-semibold">CRI</span>
+  <span class="text-black/55 dark:text-white/45 mx-0.5 font-medium">→</span>
+  <span class="border border-fuchsia-500 dark:border-fuchsia-400 rounded-full px-2 py-0.5 bg-fuchsia-50 dark:bg-fuchsia-950 text-fuchsia-600 dark:text-fuchsia-400 font-semibold">CNI</span>
+  <span class="text-black/55 dark:text-white/45 mx-0.5 font-medium">→</span>
+  <span class="border-2 border-[#e06b20] dark:border-[#f0853f] rounded-full px-2 py-0.5 bg-[#e06b20]/[0.15] dark:bg-[#f0853f]/[0.15] text-[#9a3412] dark:text-[#fb923c] font-bold">Pod Running</span>
+</div>
+<div class="flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-black/50 dark:text-white/40 mb-4">
+  <span>1. POST pod spec</span>
+  <span>2. validate & store</span>
+  <span>3. watch unscheduled</span>
+  <span>4. bind to node</span>
+  <span>5. watch assigned</span>
+  <span>6. create pause</span>
+  <span>7. set up network</span>
+  <span>8-9. start containers</span>
+  <span>10. probes → Running</span>
+</div>
 
 **reference**: [kubernetes scheduler deep dive](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/)
 

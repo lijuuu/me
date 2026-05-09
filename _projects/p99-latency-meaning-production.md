@@ -99,3 +99,9 @@ send to one replica. if it doesn't respond in N milliseconds, send to a second. 
 monitor all of them. optimize from the tail up — fixing p99 usually fixes everything else.
 
 **reference**: [the RED method](https://grafana.com/blog/2018/08/02/the-red-method-how-to-instrument-your-services/) — rate, errors, duration: the three golden signals for monitoring service health
+
+## further reading
+
+- [the tail at scale](https://cacm.acm.org/research/the-tail-at-scale/)
+- [HDR histogram](https://github.com/HdrHistogram/HdrHistogram)
+- [google SRE book — service level objectives](https://sre.google/sre-book/service-level-objectives/)

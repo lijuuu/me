@@ -85,3 +85,9 @@ for each dependency call:
 6. never retry on 4xx errors (except 429 with Retry-After)
 
 **reference**: [google SRE book - overload and failure](https://sre.google/sre-book/handling-overload/)
+
+## further reading
+
+- [stripe's idempotency design](https://stripe.com/docs/idempotency)
+- [exponential backoff and jitter — AWS architecture](https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/)
+- [hystrix — netflix circuit breaker](https://github.com/Netflix/Hystrix/wiki)

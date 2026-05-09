@@ -2,12 +2,13 @@ import { useEffect, useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { marked } from "marked";
 import { getProject, type Project } from "../data/projects";
+import { slugify } from "../utils/slugify";
 import Toc from "../components/Toc";
 
 marked.use({
   renderer: {
     heading(text: string, level: number) {
-      const id = text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+      const id = slugify(text);
       return `<h${level} id="${id}">${text}</h${level}>`;
     },
     link(href: string, _title: string | null | undefined, text: string) {
@@ -49,8 +50,9 @@ export default function ProjectPage() {
           data-prose
           className="flex flex-col gap-4 text-sm leading-relaxed font-normal
             text-black/70 dark:text-white/55
-            [&_h2]:text-base [&_h2]:font-semibold [&_h2]:mt-6 [&_h2]:mb-1 [&_h2]:text-[#222] dark:[&_h2]:text-[#d4d4d4]
-            [&_h3]:text-sm [&_h3]:font-semibold [&_h3]:mt-4 [&_h3]:mb-1 [&_h3]:text-black/80 dark:[&_h3]:text-white/65
+            [&_h2]:text-base [&_h2]:font-semibold [&_h2]:mt-5 [&_h2]:mb-0 [&_h2]:text-[#222] dark:[&_h2]:text-[#d4d4d4]
+            [&_h3]:text-sm [&_h3]:font-semibold [&_h3]:mt-3 [&_h3]:mb-0 [&_h3]:text-black/80 dark:[&_h3]:text-white/65
+            [&_h3+_p]:mt-0.5
             [&_p]:leading-[1.4]
             [&_a]:underline
             [&_ul]:pl-4 [&_ol]:pl-4 [&_li]:leading-[1.4]

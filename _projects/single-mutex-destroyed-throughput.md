@@ -108,8 +108,14 @@ good for buffered writes. worst-case latency = channel processing time.
 3. **code review rule**: any mutex in the hot path (every request) is a red flag
 4. **metrics**: monitor lock wait time in production
 
-**reference**: [diagnosing mutex contention in go](https://www.uber.com/blog/mutex-contention-profiling/)
+**reference**: [diagnosing mutex contention in go](https://go.dev/blog/pprof)
 
 ## the lesson
 
 mutexes are fine. a mutex in the request hot path is not. always shard, buffer, or eliminate contention from the critical path.
+
+## further reading
+
+- [lock-free programming with atomic operations](https://pkg.go.dev/sync/atomic)
+- [go concurrency patterns — pipelines](https://go.dev/blog/pipelines)
+- [diagnosing mutex contention in go](https://go.dev/blog/pprof)

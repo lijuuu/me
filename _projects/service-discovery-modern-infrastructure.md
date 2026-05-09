@@ -26,7 +26,7 @@ client sends to a load balancer. the LB queries registry, forwards to a backend.
 
 pro: client is simple. con: extra hop, LB becomes bottleneck.
 
-**reference**: [service discovery in microservices](https://microservices.io/patterns/service-discovery.html)
+**reference**: [service discovery in microservices](https://microservices.io/patterns/)
 
 ## DNS as service discovery
 
@@ -118,3 +118,9 @@ your application must handle requests to dead backends:
 - don't cache discovery results forever
 
 **reference**: [the CAP theorem and service discovery](https://www.consul.io/docs/architecture/consensus)
+
+## further reading
+
+- [service discovery in microservices](https://microservices.io/patterns/)
+- [consul architecture](https://www.consul.io/docs/architecture)
+- [kube-proxy IPVS mode deep dive](https://kubernetes.io/blog/2018/07/09/ipvs-based-in-cluster-load-balancing-deep-dive/)

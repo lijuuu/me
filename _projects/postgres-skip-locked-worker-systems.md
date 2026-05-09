@@ -102,3 +102,9 @@ use postgres as a queue when you value correctness and simplicity over raw throu
 and always remember: there is no exactly-once delivery. there is idempotent processing.
 
 **reference**: [job queue patterns](https://brandur.org/job-drain) — designing durable job queues with idempotency, retries, and graceful draining
+
+## further reading
+
+- [postgres FOR UPDATE SKIP LOCKED](https://www.postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE)
+- [how we built a job queue with postgres](https://brandur.org/postgres-queues)
+- [job queue patterns — brandur](https://brandur.org/job-drain)

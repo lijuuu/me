@@ -61,7 +61,7 @@ for {
 
 fix: use epoll/kqueue directly or use a library like `gnet` or `evio`.
 
-**reference**: [million websockets with go](https://www.freecodecamp.org/news/million-websockets-and-go/)
+**reference**: [million websockets with go](https://github.com/gobwas/ws)
 
 ## the close_wait time bomb
 
@@ -112,3 +112,9 @@ cat /proc/sys/fs/epoll/max_user_watches  # default: ~800k on modern kernels
 | goroutines | ~100k | scheduler latency |
 | epoll | ~500k fds | epoll_wait() slows |
 | bandwidth | varies | send buffer fills |
+
+## further reading
+
+- [linux file descriptors and ulimit](https://www.kernel.org/doc/html/latest/admin-guide/sysctl/fs.html)
+- [TCP tuning in linux](https://www.kernel.org/doc/html/latest/networking/ip-sysctl.html)
+- [million websockets with go](https://github.com/gobwas/ws)

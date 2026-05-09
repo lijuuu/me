@@ -36,20 +36,24 @@ body {
   background-color: var(--bg);
   color: var(--fg);
   min-height: 100vh;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 1.45;
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.2s, color 0.2s;
 }
 
+#root {
+  min-height: 100vh;
+}
+
 /* mono mode — matched visually to serif */
 .mono body,
 .mono {
   font-family: "IBM Plex Mono", monospace !important;
-  font-size: 15px;
-  line-height: 1.45;
-  letter-spacing: -0.02em;
+  font-size: 16px;
+  line-height: 1.52;
+  letter-spacing: -0.015em;
 }
 
 .mono pre,
@@ -130,7 +134,7 @@ html {
 
 /* focus mode */
 .focus-mode *:not(.focus-active) {
-  opacity: 0.5;
+  opacity: 0.35;
 }
 
 .focus-mode .focus-active {

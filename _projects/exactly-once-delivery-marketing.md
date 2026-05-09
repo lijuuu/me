@@ -13,7 +13,7 @@ two armies must coordinate an attack. they communicate via messenger through ene
 
 this is the two-generals problem. it proves that over an unreliable channel, you cannot guarantee both parties agree on delivery. the messenger is your TCP packet, your kafka message, your gRPC call.
 
-**reference**: [the two generals problem](https://www.cs.cornell.edu/courses/cs614/2004sp/papers/gra78.pdf)
+**reference**: [the two generals problem](https://en.wikipedia.org/wiki/Two_Generals%27_Problem)
 
 ## what "exactly once" actually means
 
@@ -81,3 +81,9 @@ even if `ChargeCustomer` is called 3 times with the same key, the customer is ch
 you can have at-most-once delivery (don't retry). you can have at-least-once delivery (retry until acknowledged). you cannot have exactly-once delivery over an unreliable network. you can have exactly-once processing — but that's idempotency, not delivery.
 
 design your systems assuming every message will be delivered at least once, possibly multiple times. make every operation idempotent. that's not marketing — that's engineering.
+
+## further reading
+
+- [the two generals problem](https://en.wikipedia.org/wiki/Two_Generals%27_Problem)
+- [kafka exactly-once semantics](https://www.confluent.io/blog/exactly-once-semantics-are-possible-heres-how-apache-kafka-does-it/)
+- [stripe idempotency](https://stripe.com/docs/idempotency)

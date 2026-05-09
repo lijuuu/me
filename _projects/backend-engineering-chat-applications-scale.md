@@ -50,7 +50,7 @@ if msg 2 arrives before msg 1 at a recipient, they see the correction before the
 - server-assigned sequence numbers per chat
 - hybrid logical clocks
 
-**reference**: [lamport timestamps explained](https://mwhittaker.github.io/blog/lamport/)
+**reference**: [lamport timestamps explained](https://lamport.azurewebsites.net/pubs/time-clocks.pdf)
 
 ## presence: the expensive problem
 
@@ -104,3 +104,9 @@ discord migrated from cassandra to scylladb for hot storage. whatsapp built a cu
 | concurrent websockets | 1k | 12M+ |
 | servers | 3 | 1000+ |
 | datacenters | 1 | multi-region |
+
+## further reading
+
+- [discord — how discord stores billions of messages](https://discord.com/blog/how-discord-stores-billions-of-messages)
+- [how discord handles millions of concurrent connections](https://discord.com/blog/how-discord-handles-millions-of-concurrent-connections)
+- [lamport — time, clocks, and the ordering of events](https://lamport.azurewebsites.net/pubs/time-clocks.pdf)

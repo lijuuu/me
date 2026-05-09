@@ -88,7 +88,7 @@ haproxy -f haproxy.cfg
 # internally: cpu-map 1 0, cpu-map 2 1, ...
 ```
 
-**reference**: [haproxy architecture guide](https://www.haproxy.com/documentation/haproxy-runtime-api-guide/latest/)
+**reference**: [haproxy runtime API](https://www.haproxy.com/documentation/haproxy-runtime-api/)
 
 ## the zero-copy chain
 
@@ -136,3 +136,9 @@ fs.nr_open = 2000000
 * soft nofile 1000000
 * hard nofile 1000000
 ```
+
+## further reading
+
+- [nginx architecture — how we designed for performance & scale](https://www.nginx.com/blog/inside-nginx-how-we-designed-for-performance-scale/)
+- [envoy threading model](https://blog.envoyproxy.io/envoy-threading-model-a8d44b922310)
+- [zero copy in linux](https://www.linuxjournal.com/article/6345)

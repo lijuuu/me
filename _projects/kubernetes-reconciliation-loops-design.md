@@ -123,3 +123,9 @@ an infinite loop of "create pod -> pod fails -> reconcile -> create pod -> pod f
 > "don't tell the system what to do. tell it what the desired state is. let it figure out how to get there."
 
 this is the reconciliation pattern. it's not just for kubernetes.
+
+## further reading
+
+- [kubernetes controller pattern](https://kubernetes.io/docs/concepts/architecture/controller/)
+- [level-triggered vs edge-triggered controllers](https://kubernetes.io/docs/concepts/architecture/controller/#writing-controllers)
+- [controller-runtime](https://github.com/kubernetes-sigs/controller-runtime)

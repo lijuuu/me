@@ -111,3 +111,9 @@ each server tracks locally, syncs with a central store periodically. reduces red
 GCRA (generic cell rate algorithm) is the gold standard — it's a leaky bucket variant that's more memory-efficient. used by cloudflare and nginx.
 
 **reference**: [GCRA explained](https://brandur.org/rate-limiting)
+
+## further reading
+
+- [rate limiting algorithms — cloudflare](https://blog.cloudflare.com/counting-things-a-lot-of-different-things/)
+- [token bucket algorithm](https://en.wikipedia.org/wiki/Token_bucket)
+- [GCRA explained](https://brandur.org/rate-limiting)
