@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <id>https://lijuu.me</id>
-  <title>liju thomas</title>
-  <updated>2026-01-01T00:00:00Z</updated>
-  <author>
-    <name>liju thomas</name>
-    <email>lijuthomasliju03@gmail.com</email>
-    <uri>https://lijuu.me</uri>
-  </author>
-  <link rel="alternate" href="https://lijuu.me"/>
-  <link rel="self" href="https://lijuu.me/feed.xml"/>
-  <subtitle>full stack developer. go, typescript, react.</subtitle>
-</feed>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>liju thomas</title>
+    <link>https://lijuu.me</link>
+    <description>generalist — go, distributed systems, react, typescript. building things that scale.</description>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 13 May 2026 00:00:00 +0000</lastBuildDate>
+    <managingEditor>lijuthomasliju03@gmail.com (liju thomas)</managingEditor>
+    <webMaster>lijuthomasliju03@gmail.com (liju thomas)</webMaster>
+    <atom:link href="https://lijuu.me/feed.xml" rel="self" type="application/rss+xml"/>
+    <image>
+      <url>https://avatars.githubusercontent.com/u/34997667?v=4</url>
+      <title>liju thomas</title>
+      <link>https://lijuu.me</link>
+    </image>
+    <item>
+      <title>zenx — competitive coding platform</title>
+      <link>https://zenx.lijuu.me</link>
+      <guid isPermaLink="true">https://zenx.lijuu.me</guid>
+      <description><![CDATA[go, typescript, react, gRPC, nats, docker sandbox, postgres, mongodb, redis, prometheus, grafana, betterstack, aws, gcp, kubernetes]]></description>
+      <pubDate>Wed, 13 May 2026 00:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>
