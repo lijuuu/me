@@ -48,6 +48,7 @@ function App() {
         <Route path="/blog/:slug" element={<ProjectPage />} />
         <Route path="/cv" element={<CvPage />} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   );
 }
