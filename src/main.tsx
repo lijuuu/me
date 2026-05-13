@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import ThemeToggle from "./components/ThemeToggle";
 import LofiPlayer from "./components/LofiPlayer";
 import AskChatGPT from "./components/AskChatGPT";
@@ -46,6 +47,7 @@ function App() {
         <Route path="/blog/:slug" element={<ProjectPage />} />
         <Route path="/cv" element={<CvPage />} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   );
 }

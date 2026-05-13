@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "dayjs": "^1.11.13",
     "marked": "^12.0.0",
     "react": "^18.3.1",
