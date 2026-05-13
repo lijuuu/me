@@ -57,7 +57,24 @@ export default function Home() {
         </nav>
       </header>
 
-      <section className="flex flex-col gap-8">
+      <section className="flex flex-col gap-2">
+        <h2 className="text-[12px] text-black/25 dark:text-white/20 lowercase font-medium">projects</h2>
+        <a href="https://zenx.lijuu.me" target="_blank" rel="noopener noreferrer"
+           className="text-base lowercase no-underline hover:text-[#e06b20] dark:hover:text-[#f0853f] font-medium">
+          zenx — competitive coding platform
+        </a>
+        <a href="https://github.com/zenxbattle" target="_blank" rel="noopener noreferrer"
+           className="text-sm text-black/45 dark:text-white/30 lowercase no-underline hover:text-[#e06b20] dark:hover:text-[#f0853f]">
+          source code: github.com/zenxbattle
+        </a>
+        <p className="text-sm text-black/45 dark:text-white/30 lowercase leading-relaxed max-w-lg">
+          go, typescript, react, gRPC, nats, docker sandbox, postgres, mongodb, redis, prometheus, grafana, betterstack, aws, gcp, kubernetes
+        </p>
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <h2 className="text-[12px] text-black/25 dark:text-white/20 lowercase font-medium">learning</h2>
+        <div className="flex flex-col gap-8">
         {projects.map(({ meta }) => (
           <article key={meta.slug} className="flex flex-col gap-1">
             <time className="text-[12px] text-black/25 dark:text-white/20 lowercase">
@@ -71,6 +88,7 @@ export default function Home() {
             </p>
           </article>
         ))}
+        </div>
       </section>
 
       <footer className="text-[12px] lowercase pt-8 flex flex-col gap-1">
