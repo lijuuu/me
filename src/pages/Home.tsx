@@ -72,7 +72,7 @@ export default function Home() {
         </p>
       </section>
 
-      <section className="flex flex-col gap-4">
+      {false && <section className="flex flex-col gap-4">
         <h2 className="text-[12px] text-black/25 dark:text-white/20 lowercase font-medium">learning</h2>
         <div className="flex flex-col gap-8">
         {projects.map(({ meta }) => (
@@ -89,7 +89,7 @@ export default function Home() {
           </article>
         ))}
         </div>
-      </section>
+      </section>}
 
       <footer className="text-[12px] lowercase pt-8 flex flex-col gap-1">
         <p className="text-[#e06b20]/30 dark:text-[#f0853f]/30">keep it simple</p>
