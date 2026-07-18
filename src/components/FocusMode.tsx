@@ -67,7 +67,7 @@ export default function FocusMode() {
   return (
     <button
       onClick={() => setOn(!on)}
-      className={`text-[11px] lowercase bg-transparent border-0 cursor-pointer transition-colors ${on ? "text-[#e06b20] dark:text-[#f0853f]" : "text-black/20 dark:text-white/15 hover:text-[#e06b20] dark:hover:text-[#f0853f]"}`}
+      className={`text-[11px] lowercase bg-transparent border-0 cursor-pointer ${on ? "text-[#2563eb]" : "text-[#888] hover:text-[#2563eb]"}`}
     >
       focus
     </button>

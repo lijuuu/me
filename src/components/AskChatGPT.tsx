@@ -44,7 +44,7 @@ export default function AskChatGPT() {
         setPos((p) => ({ ...p, visible: false }));
       }}
       onMouseDown={(e) => e.stopPropagation()}
-      className="fixed z-[9998] text-[11px] lowercase text-[#e06b20] dark:text-[#f0853f] bg-[#f8f8f5] dark:bg-[#1e1e20] border border-[#e06b20]/20 dark:border-[#f0853f]/20 rounded px-2 py-0.5 hover:bg-[#e06b20] hover:text-white dark:hover:bg-[#f0853f] dark:hover:text-[#1e1e20] transition-colors cursor-pointer"
+      className="fixed z-[9998] text-[11px] lowercase text-[#2563eb] bg-white border border-[#2563eb]/20 rounded px-2 py-0.5 hover:bg-[#2563eb] hover:text-white cursor-pointer"
       style={{ left: pos.x, top: pos.y, transform: "translateY(-50%)" }}
     >
       ask chatgpt

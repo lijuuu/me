@@ -67,31 +67,31 @@ export default function LofiPlayer() {
 
   return (
     <div className="fixed bottom-4 right-4 z-50 hidden md:flex items-center gap-2 lowercase">
-      <div className={`w-1.5 h-1.5 rounded-full ${playing ? "bg-[#e06b20] dark:bg-[#f0853f]" : "bg-black/10 dark:bg-white/10"}`} />
-      <button onClick={toggle} className={`text-[11px] bg-transparent border-0 cursor-pointer lowercase ${playing ? "text-[#e06b20] dark:text-[#f0853f]" : "text-black/25 dark:text-white/20 hover:text-[#e06b20] dark:hover:text-[#f0853f]"}`}>
+      <div className={`w-1.5 h-1.5 rounded-full ${playing ? "bg-[#2563eb]" : "bg-black/10"}`} />
+      <button onClick={toggle} className={`text-[11px] bg-transparent border-0 cursor-pointer lowercase ${playing ? "text-[#2563eb]" : "text-[#888] hover:text-[#2563eb]"}`}>
         lofi
       </button>
       {playing && (
-        <button onClick={() => play(STREAMS[Math.floor(Math.random() * STREAMS.length)])} className="text-[11px] text-black/20 dark:text-white/15 hover:text-[#e06b20] dark:hover:text-[#f0853f] bg-transparent border-0 cursor-pointer lowercase">
+        <button onClick={() => play(STREAMS[Math.floor(Math.random() * STREAMS.length)])} className="text-[11px] text-[#888] hover:text-[#2563eb] bg-transparent border-0 cursor-pointer lowercase">
           shuffle
         </button>
       )}
-      <button onClick={() => setMenu(!menu)} className="text-[11px] text-black/20 dark:text-white/15 hover:text-[#e06b20] dark:hover:text-[#f0853f] bg-transparent border-0 cursor-pointer lowercase">
+      <button onClick={() => setMenu(!menu)} className="text-[11px] text-[#888] hover:text-[#2563eb] bg-transparent border-0 cursor-pointer lowercase">
         choose
       </button>
       {playing && (
-        <span className="text-[10px] text-[#e06b20] dark:text-[#f0853f] max-w-[160px] truncate hidden sm:inline">
+        <span className="text-[10px] text-[#2563eb] max-w-[160px] truncate hidden sm:inline">
           {current.name}
         </span>
       )}
 
       {menu && (
-        <div ref={menuRef} className="absolute bottom-full right-0 mb-2 bg-[#f8f8f5] dark:bg-[#1e1e20] border border-black/[0.06] dark:border-white/[0.06] rounded-lg shadow-xl p-2 flex flex-col gap-0.5 w-[220px]">
+        <div ref={menuRef} className="absolute bottom-full right-0 mb-2 bg-white border border-black/[0.08] rounded p-2 flex flex-col gap-0.5 w-[220px]">
           {STREAMS.map((s) => (
             <button
               key={s.id}
               onClick={() => play(s)}
-              className={`text-left text-[11px] lowercase px-2 py-1 rounded truncate cursor-pointer ${current.id === s.id && playing ? "text-[#e06b20] dark:text-[#f0853f]" : "text-black/35 dark:text-white/25 hover:bg-black/[0.03] dark:hover:bg-white/[0.03]"}`}
+                className={`text-left text-[11px] lowercase px-2 py-1 rounded truncate cursor-pointer ${current.id === s.id && playing ? "text-[#2563eb]" : "text-[#888] hover:bg-black/[0.04]"}`}
             >
               {s.name}
             </button>

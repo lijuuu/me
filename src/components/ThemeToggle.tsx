@@ -69,13 +69,13 @@ export default function ThemeToggle() {
     <div className="fixed top-4 right-4 z-50 flex gap-3 lowercase">
       <button
         onClick={toggleFont}
-        className="text-[11px] text-black/20 dark:text-white/15 hover:text-[#e06b20] dark:hover:text-[#f0853f] transition-colors bg-transparent border-0 cursor-pointer lowercase"
+        className="text-[11px] text-[#888] hover:text-[#2563eb] bg-transparent border-0 cursor-pointer lowercase"
       >
         {serif ? "mono" : "serif"}
       </button>
       <button
         onClick={toggleTheme}
-        className="text-[11px] text-black/20 dark:text-white/15 hover:text-[#e06b20] dark:hover:text-[#f0853f] transition-colors bg-transparent border-0 cursor-pointer lowercase"
+        className="text-[11px] text-[#888] hover:text-[#2563eb] bg-transparent border-0 cursor-pointer lowercase"
       >
         {dark ? "light" : "dark"}
       </button>

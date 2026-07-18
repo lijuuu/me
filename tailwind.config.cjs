@@ -9,14 +9,14 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        mono: ['"IBM Plex Mono"', "monospace"],
+        mono: ['"Caveat"', "cursive"],
       },
       colors: {
         accent: {
-          DEFAULT: "#e06b20",
-          dark: "#f0853f",
-          muted: "rgb(224 107 32 / 0.15)",
-          "muted-dark": "rgb(240 133 63 / 0.15)",
+          DEFAULT: "#6B9FFF",
+          dark: "#5B8FEF",
+          muted: "rgb(107 159 255 / 0.15)",
+          "muted-dark": "rgb(91 143 239 / 0.15)",
         },
       },
     },

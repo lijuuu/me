@@ -6,8 +6,7 @@ function makePawPrint(): string {
   const c = document.createElement("canvas");
   c.width = 12; c.height = 10;
   const ctx = c.getContext("2d")!;
-  const isDark = document.documentElement.classList.contains("dark");
-  ctx.fillStyle = isDark ? "rgba(240,133,63,0.08)" : "rgba(224,107,32,0.08)";
+  ctx.fillStyle = "rgba(37,99,235,0.08)";
   ctx.beginPath();
   ctx.ellipse(6, 6, 3, 2.5, 0, 0, Math.PI * 2);
   ctx.fill();
@@ -189,8 +188,8 @@ export default function Cat() {
           const ox = (Math.random() - 0.5) * 16;
           const oy = (Math.random() - 0.5) * 10;
           dust.style.cssText = `
-            position:fixed;left:${eng.x + 28 + ox}px;top:${eng.y + 52 + oy}px;
-            width:4px;height:4px;border-radius:50%;background:#e06b20;
+             position:fixed;left:${eng.x + 28 + ox}px;top:${eng.y + 52 + oy}px;
+             width:4px;height:4px;border-radius:50%;background:#2563eb;
             opacity:0.12;pointer-events:none;z-index:0;
             transition:opacity 2s ease-out;
           `;

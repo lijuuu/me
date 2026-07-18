@@ -65,7 +65,7 @@ export default function Toc({ content }: { content: string }) {
 
   return (
     <nav className="hidden xl:block fixed right-8 top-24 w-48 text-[12px] leading-relaxed lowercase font-mono">
-      <p className="text-black/30 dark:text-white/25 mb-3">on this page</p>
+      <p className="text-white/35 mb-3">on this page</p>
       <ul className="flex flex-col gap-1.5">
         {items.map((h) => (
           <li key={h.id} style={{ paddingLeft: h.level === 3 ? "12px" : "0" }}>
@@ -74,8 +74,8 @@ export default function Toc({ content }: { content: string }) {
                 onClick={(e) => { e.preventDefault(); scrollTo(h.id); }}
                 className={`no-underline hover:underline block truncate ${
                   active === h.id
-                    ? "text-[#e06b20] dark:text-[#f0853f]"
-                    : "text-black/35 dark:text-white/25"
+                    ? "text-[#6B9FFF]"
+                    : "text-white/35"
                 }`}
             >
               {h.text}

@@ -64,15 +64,15 @@ export default function BlogSearch() {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[10000] flex items-start justify-center pt-[20vh] bg-black/[0.03] dark:bg-black/20 backdrop-blur-[0.5px]" onClick={() => { setOpen(false); setQuery(""); }}>
-      <div className="bg-[#f8f8f5] dark:bg-[#1e1e20] border border-black/[0.06] dark:border-white/[0.06] rounded-lg w-full max-w-md shadow-2xl p-4" onClick={(e) => e.stopPropagation()}>
+    <div className="fixed inset-0 z-[10000] flex items-start justify-center pt-[20vh] bg-black/[0.03]" onClick={() => { setOpen(false); setQuery(""); }}>
+      <div className="bg-white border border-black/[0.08] rounded w-full max-w-md p-4" onClick={(e) => e.stopPropagation()}>
         <input
           ref={inputRef}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKey}
           placeholder="search blogs..."
-          className="w-full bg-transparent text-sm lowercase outline-none text-[#222] dark:text-[#d4d4d4] placeholder:text-black/15 dark:placeholder:text-white/10"
+          className="w-full bg-transparent text-sm lowercase outline-none text-[#111] placeholder:text-[#888]"
           autoFocus
         />
         {results.length > 0 && (
@@ -83,18 +83,18 @@ export default function BlogSearch() {
                 onClick={() => select(p.meta.slug)}
                 className={`text-left text-xs lowercase px-2 py-1.5 rounded truncate cursor-pointer ${
                   i === activeIndex
-                    ? "bg-[#e06b20]/10 dark:bg-[#f0853f]/15 text-[#e06b20] dark:text-[#f0853f]"
-                    : "text-black/45 dark:text-white/30 hover:bg-black/[0.03] dark:hover:bg-white/[0.04]"
+                    ? "bg-[#2563eb]/10 text-[#2563eb]"
+                    : "text-[#555] hover:bg-black/[0.04]"
                 }`}
               >
                 {p.meta.title}
-                <span className="text-black/15 dark:text-white/08 ml-2">{p.meta.date.split(",")[0]}</span>
+                <span className="text-[#888] ml-2">{p.meta.date.split(",")[0]}</span>
               </button>
             ))}
           </div>
         )}
         {debounced && results.length === 0 && (
-          <p className="text-xs text-black/20 dark:text-white/10 lowercase px-2 pt-2">no results</p>
+          <p className="text-xs text-[#888] lowercase px-2 pt-2">no results</p>
         )}
       </div>
     </div>

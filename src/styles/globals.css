@@ -1,69 +1,43 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --bg: #fafaf7;
-  --fg: #222;
-  --fg-muted: rgba(0, 0, 0, 0.5);
-  --fg-faint: rgba(0, 0, 0, 0.25);
-  --accent: #e06b20;
-  --accent-muted: rgba(224, 107, 32, 0.15);
-  --border: rgba(0, 0, 0, 0.06);
-  --code-bg: rgba(0, 0, 0, 0.04);
-  --blockquote: rgba(0, 0, 0, 0.4);
-  --paw: rgba(224, 107, 32, 0.08);
-}
-
-.dark {
-  --bg: #1e1e20;
-  --fg: #d4d4d4;
-  --fg-muted: rgba(212, 212, 212, 0.5);
-  --fg-faint: rgba(212, 212, 212, 0.2);
-  --accent: #f0853f;
-  --accent-muted: rgba(240, 133, 63, 0.15);
-  --border: rgba(255, 255, 255, 0.06);
-  --code-bg: rgba(255, 255, 255, 0.06);
-  --blockquote: rgba(212, 212, 212, 0.35);
-  --paw: rgba(240, 133, 63, 0.08);
+  --bg: #0B37B8;
+  --fg: #ffffff;
+  --fg-muted: rgba(255,255,255,0.60);
+  --fg-faint: rgba(255,255,255,0.35);
+  --accent: #6B9FFF;
+  --accent-muted: rgba(107,159,255,0.20);
+  --highlight: #FF5757;
+  --border: rgba(255,255,255,0.08);
+  --code-bg: rgba(107,159,255,0.10);
+  --blockquote: rgba(255,255,255,0.45);
+  --paw: rgba(107,159,255,0.06);
 }
 
 html,
 body {
-  font-family: "Newsreader", Georgia, serif;
+  font-family: "Architects Daughter", cursive;
   background-color: var(--bg);
   color: var(--fg);
   min-height: 100vh;
-  font-size: 18px;
-  font-weight: 400;
+  font-size: 17px;
+  font-weight: 600;
   line-height: 1.45;
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.2s, color 0.2s;
 }
 
 #root {
   min-height: 100vh;
 }
 
-/* mono mode — matched visually to serif */
-.mono body,
-.mono {
-  font-family: "IBM Plex Mono", monospace !important;
-  font-size: 16px;
-  line-height: 1.52;
-  letter-spacing: -0.015em;
-}
-
-.mono pre,
-.mono code {
-  font-family: "IBM Plex Mono", monospace !important;
-}
-
 h1, h2, h3, h4 {
   color: var(--fg);
-  font-weight: 600;
+  font-weight: 700;
+  -webkit-text-stroke: 0.5px;
 }
 
 a {
@@ -71,7 +45,6 @@ a {
   text-decoration: underline;
   text-decoration-color: var(--accent-muted);
   text-underline-offset: 3px;
-  transition: color 0.15s;
 }
 
 a:hover {
@@ -100,49 +73,20 @@ blockquote {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e06b20;
+  background: #6B9FFF;
   border-radius: 2px;
 }
 
-.dark ::-webkit-scrollbar-thumb {
-  background: #f0853f;
-}
-
-/* firefox */
 html {
-  scrollbar-color: #e06b20 transparent;
+  scrollbar-color: #6B9FFF transparent;
   scrollbar-width: thin;
 }
 
-.dark {
-  scrollbar-color: #f0853f transparent;
-}
-
 ::selection {
-  background: rgba(224, 107, 32, 0.18);
-  color: inherit;
+  background: rgba(107,159,255,0.30);
+  color: #fff;
 }
 
-.dark ::selection {
-  background: rgba(240, 133, 63, 0.22);
-}
-
-/* cat smaller on mobile */
 @media (max-width: 639px) {
   .neko { width: 32px !important; height: 32px !important; }
-}
-
-/* focus mode */
-.focus-mode *:not(.focus-active) {
-  opacity: 0.35;
-}
-
-.focus-mode .focus-active {
-  opacity: 1;
-  color: #000;
-}
-
-.dark .focus-mode .focus-active {
-  color: #fff;
-  opacity: 1;
 }

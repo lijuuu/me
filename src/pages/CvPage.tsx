@@ -4,8 +4,8 @@ export default function CvPage() {
   return (
     <>
       <div className="fixed top-4 left-4 right-4 z-50 flex items-center justify-between lowercase">
-        <Link to="/" className="text-xs text-[#e06b20]/30 dark:text-[#f0853f]/30 hover:text-[#e06b20] dark:hover:text-[#f0853f] lowercase no-underline">&larr; home</Link>
-        <a href="/cv.pdf" download className="text-xs text-[#e06b20] dark:text-[#f0853f] underline underline-offset-2">download &darr;</a>
+        <Link to="/" className="text-xs text-[#6B9FFF]/60 hover:text-[#6B9FFF] lowercase no-underline">&larr; home</Link>
+        <a href="/cv.pdf" download className="text-xs text-[#6B9FFF] underline underline-offset-2">download &darr;</a>
       </div>
       <iframe
         src="/cv.pdf"

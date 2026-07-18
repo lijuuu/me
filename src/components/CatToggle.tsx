@@ -44,10 +44,10 @@ export default function CatToggle() {
   return (
     <button
       onClick={toggle}
-      className={`text-[11px] transition-colors bg-transparent border-0 cursor-pointer lowercase ${
+      className={`text-[11px] bg-transparent border-0 cursor-pointer lowercase ${
         visible
-          ? "text-[#e06b20] dark:text-[#f0853f]"
-          : "text-black/20 dark:text-white/15 hover:text-[#e06b20] dark:hover:text-[#f0853f]"
+          ? "text-[#2563eb]"
+          : "text-[#888] hover:text-[#2563eb]"
       }`}
     >
       cat
