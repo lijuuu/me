@@ -1,0 +1,73 @@
+{
+  "hash": "d42de316",
+  "configHash": "e4e87009",
+  "lockfileHash": "00eda938",
+  "browserHash": "9532bc73",
+  "optimized": {
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/.pnpm/react@18.3.1/node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "ccfe251f",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/.pnpm/react@18.3.1/node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "616cf5d1",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "916feb17",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/.pnpm/react-router-dom@6.30.3_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "9f1ef35a",
+      "needsInterop": false
+    },
+    "@vercel/analytics/react": {
+      "src": "../../node_modules/.pnpm/@vercel+analytics@2.0.1_react@18.3.1/node_modules/@vercel/analytics/dist/react/index.mjs",
+      "file": "@vercel_analytics_react.js",
+      "fileHash": "c6da9b19",
+      "needsInterop": false
+    },
+    "marked": {
+      "src": "../../node_modules/.pnpm/marked@12.0.2/node_modules/marked/lib/marked.esm.js",
+      "file": "marked.js",
+      "fileHash": "40b5c1cc",
+      "needsInterop": false
+    },
+    "dayjs": {
+      "src": "../../node_modules/.pnpm/dayjs@1.11.20/node_modules/dayjs/dayjs.min.js",
+      "file": "dayjs.js",
+      "fileHash": "6b5e6a9a",
+      "needsInterop": true
+    },
+    "dayjs/plugin/utc": {
+      "src": "../../node_modules/.pnpm/dayjs@1.11.20/node_modules/dayjs/plugin/utc.js",
+      "file": "dayjs_plugin_utc.js",
+      "fileHash": "a178dd56",
+      "needsInterop": true
+    },
+    "dayjs/plugin/timezone": {
+      "src": "../../node_modules/.pnpm/dayjs@1.11.20/node_modules/dayjs/plugin/timezone.js",
+      "file": "dayjs_plugin_timezone.js",
+      "fileHash": "3f221523",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-7JL227PV": {
+      "file": "chunk-7JL227PV.js"
+    },
+    "chunk-WIKVF3US": {
+      "file": "chunk-WIKVF3US.js"
+    },
+    "chunk-I2LLTMMF": {
+      "file": "chunk-I2LLTMMF.js"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+---
+title: how firecracker works
+date: 2025-07-15
+slug: how-firecracker-works
+description: a deep dive into aws's microvm technology that powers lambda and fargate
+---
+
+firecracker is an open-source virtual machine monitor (vmm) built by aws to run serverless workloads at scale. it powers aws lambda and fargate — every function invocation, every container launch, millions per second. the design goal was extreme: boot a linux kernel in under 125ms, use less than 5mb of memory overhead per microvm, and never compromise on security.
+## why not containers?
+containers share the host kernel. that's the problem. a kernel exploit in one container compromises every other container on the same host. for multi-tenant serverless platforms where thousands of strangers run code on the same machine, container isolation isn't enough. you need hardware virtualization. but traditional vms (qemu/kvm) are heavy — gigabytes of memory, seconds to boot, bloated device emulation. firecracker strips vm technology down to the absolute minimum needed for a single serverless workload.
+## the architecture
+firecracker is built on kvm, the linux kernel's virtualization subsystem. kvm gives you hardware-accelerated cpu and memory isolation. firecracker adds the bare minimum on top: a virtual machine manager that exposes only what a serverless function actually needs. no bios. no vga. no usb. no pci bus. no legacy devices. the guest gets exactly five things: a virtio block device for the root filesystem, a virtio net device for networking, a serial console for logs, a keyboard controller (only for ctrl+alt+del reboot), and a programmable interval timer.
+## the memory model
+each microvm gets a fixed memory allocation at boot. no ballooning, no overcommit, no swapping. firecracker uses kvm's memory mapping directly — the guest physical memory is a contiguous region in the host's virtual address space. when aws tells firecracker "this function gets 128mb", it allocates exactly 128mb and the guest sees exactly 128mb. nothing more, nothing less. this predictability is critical for multi-tenant density calculations.
+## boot in 125ms
+how does firecracker boot so fast? three things. first, it loads the kernel directly into guest memory — no bootloader, no grub, no initrd dance. the kernel is an uncompressed elf binary that firecracker maps and jumps to directly. second, the root filesystem is a pre-built ext4 image on a virtio block device — no device probing, no driver initialization delays. third, the guest kernel is compiled with `CONFIG_NO_HZ=y` and `CONFIG_PREEMPT=n` — tickless kernel for low overhead. the combination brings boot time from seconds to double-digit milliseconds.
+## the network model
+each microvm gets a virtio-net device backed by a tap interface on the host. firecracker doesn't do network address translation itself — that's handled by the host's networking stack (iptables, nftables, or a custom cni plugin). a rate limiter built into firecracker caps bandwidth at the virtio level, preventing noisy neighbors from saturating the host nic. the bandwidth cap is configurable per microvm — 100mbps for a lambda function, 1gbps for a fargate task.
+## security
+firecracker's threat model assumes the guest kernel is hostile. every device emulation runs in a separate thread with a minimal attack surface. the virtio devices are implemented in rust, chosen specifically because the device emulation layer is where most vm escape vulnerabilities live. firecracker also uses seccomp-bpf to filter system calls — each thread gets a strict allowlist of syscalls it can make. the vcpu thread can only call kvm ioctls. the api thread can only do networking and filesystem operations. if a thread tries to call something outside its allowlist, seccomp kills it and the microvm is terminated.
+## the api
+firecracker exposes a rest api over a unix socket. curl-friendly. you can boot a microvm, hotplug a network interface, resize the block device, and take a snapshot — all through http. the api is deliberately minimal: `PUT /actions`, `PUT /boot-source`, `PUT /drives/{id}`, `PUT /network-interfaces/{id}`, `PUT /snapshot/create`. this design lets higher-level orchestrators (like lambda's internal systems) manage millions of microvms without complex rpc protocols.
+## snapshots and fast restore
+firecracker supports pause-and-resume via memory snapshots. you can checkpoint a running microvm to disk and restore it later — on the same host or a different one. the snapshot includes full guest memory, vcpu state, and device state. restore times are proportional to memory size: a 128mb microvm restores in under 50ms. aws uses this for lambda provisioned concurrency — they warm up functions, snapshot them, and restore on demand without cold start latency.
+## why it matters
+firecracker reshaped how the industry thinks about serverless isolation. before firecracker, you chose between fast-but-leaky (containers) and secure-but-slow (vms). firecracker proved you could have both. today, fly.io uses firecracker to run user vms globally. kata containers embeds firecracker as a runtime. the cloud hypervisor project extends the approach for general-purpose vms. but aws still runs the largest deployment — millions of microvms booting and terminating every second, each one isolated, fast, and secure.

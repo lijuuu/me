@@ -33,8 +33,8 @@ export default function ProjectPage() {
   if (!project) {
     return (
       <main className="relative z-10 max-w-screen-md px-6 sm:px-8 py-16">
-        <p className="text-sm lowercase text-white/60">not found.</p>
-        <Link to="/" className="text-xs underline">home</Link>
+        <p className="text-xs lowercase text-[#8892b0]">not found.</p>
+        <Link to="/" className="text-xs text-[#64b5f6]">home</Link>
       </main>
     );
   }
@@ -42,31 +42,29 @@ export default function ProjectPage() {
   return (
     <>
       <Toc content={project.content} />
-      <main className="relative z-10 max-w-screen-md px-6 sm:px-8 py-16 flex flex-col gap-6 lowercase">
-        <h2 className="text-lg font-semibold text-white">{project.meta.title}</h2>
-        <time className="text-[12px] text-white/35">{project.meta.date}</time>
-        <h3 className="text-sm text-white/60">{project.meta.description}</h3>
+      <main className="relative z-10 max-w-screen-md px-6 sm:px-8 py-16 flex flex-col gap-4 lowercase">
+        <h2 className="text-lg font-semibold text-[#e4e8f0]">{project.meta.title}</h2>
+        <time className="text-[12px] text-[#4a5578]">{project.meta.date}</time>
+        <h3 className="text-[13px] text-[#8892b0]">{project.meta.description}</h3>
         <div
           data-prose
-          className="flex flex-col gap-4 text-sm leading-relaxed font-normal
-            text-white/55
-            [&_h2]:text-base [&_h2]:font-semibold [&_h2]:mt-5 [&_h2]:mb-0 [&_h2]:text-white
-            [&_h3]:text-sm [&_h3]:font-semibold [&_h3]:mt-3 [&_h3]:mb-0 [&_h3]:text-white/80
+          className="flex flex-col gap-3 text-[13px] leading-[1.55] font-normal
+            text-[#8892b0]
+            [&_h2]:text-base [&_h2]:font-semibold [&_h2]:mt-6 [&_h2]:mb-0 [&_h2]:text-[#e4e8f0]
+            [&_h3]:text-sm [&_h3]:font-semibold [&_h3]:mt-4 [&_h3]:mb-0 [&_h3]:text-[#c8d6e5]
             [&_h3+_p]:mt-0.5
-            [&_p]:leading-[1.4]
-            [&_a]:underline
-            [&_ul]:pl-4 [&_ol]:pl-4 [&_li]:leading-[1.4]
-            [&_code]:text-[12px] [&_code]:bg-[#6B9FFF]/[0.10] [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-[#6B9FFF]
-            [&_pre]:overflow-x-auto [&_pre]:border-l-[3px] [&_pre]:border-[#6B9FFF]/20 [&_pre]:bg-white/[0.03] [&_pre]:p-3 [&_pre]:text-[12px] [&_pre]:leading-relaxed [&_pre]:text-white/50
+            [&_p]:leading-[1.55]
+            [&_a]:underline [&_a]:text-[#64b5f6]
+            [&_ul]:pl-4 [&_ol]:pl-4 [&_li]:leading-[1.55] [&_li]:mt-0.5
+            [&_code]:text-[11px] [&_code]:bg-[#64b5f6]/[0.08] [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-[#64b5f6]
+            [&_pre]:overflow-x-auto [&_pre]:border-l-[2px] [&_pre]:border-[#64b5f6]/20 [&_pre]:bg-white/[0.015] [&_pre]:p-3 [&_pre]:text-[11px] [&_pre]:leading-[1.45] [&_pre]:text-[#8892b0]
             [&_pre_code]:!text-inherit [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:rounded-none
-            [&_blockquote]:border-l-2 [&_blockquote]:border-white/[0.08] [&_blockquote]:pl-3 [&_blockquote]:text-white/40
-            [&_table]:text-[12px] [&_table]:w-full [&_th]:text-left [&_th]:font-semibold [&_th]:pb-1 [&_td]:pb-1 [&_td]:text-white/50
-            [&_hr]:border-white/[0.08] [&_hr]:my-4
+            [&_blockquote]:border-l-2 [&_blockquote]:border-[#64b5f6]/15 [&_blockquote]:pl-3 [&_blockquote]:text-[#8892b0]
+            [&_hr]:border-[#64b5f6]/[0.08] [&_hr]:my-4
           "
           dangerouslySetInnerHTML={{ __html: html }}
         />
-        <Link to="/" className="fixed top-4 left-4 z-50 text-xs text-[#6B9FFF]/60 hover:text-[#6B9FFF] lowercase no-underline">← home</Link>
-        <p className="text-[11px] text-white/35 lowercase pt-4">build, scale, observe. repeat.</p>
+        <Link to="/" className="fixed top-4 left-4 text-xs text-[#4a5578] lowercase hover:text-[#64b5f6]">← home</Link>
       </main>
     </>
   );

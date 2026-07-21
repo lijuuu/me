@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react'
 
 const CELL = 18
 const RADIUS = 0.5
-const GRID_COLOR = 'rgba(6,26,110,0.20)'
-const FILL = '#2D6BFF'
+const GRID_COLOR = 'rgba(6,26,110,0.10)'
+const FILL = 'rgba(45,107,255,0.30)'
 const FPS = 24
 
 class Simplex {
@@ -96,9 +96,9 @@ export default function GenerativeBackground() {
       centerX = W / 2; centerY = H / 2; gradW = Math.max(W, H)
 
       const grad = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, gradW * 0.7)
-      grad.addColorStop(0, '#225BFF')
-      grad.addColorStop(0.5, '#1750E5')
-      grad.addColorStop(1, '#0B37B8')
+      grad.addColorStop(0, '#244DCC')
+      grad.addColorStop(0.5, '#1A3BA6')
+      grad.addColorStop(1, '#0F287A')
       ctx.fillStyle = grad
       ctx.fillRect(0, 0, W, H)
 
@@ -106,10 +106,10 @@ export default function GenerativeBackground() {
         ctx.drawImage(gridCanvasRef.current, 0, 0)
       }
 
-      const timeSlow = t * 0.00018
+      const timeSlow = t * 0.00010
       const noiseScale = 0.004
-      const edge0 = -0.20
-      const edge1 = 0.60
+      const edge0 = 0.05
+      const edge1 = 0.75
 
       ctx.fillStyle = FILL
 

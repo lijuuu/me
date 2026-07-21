@@ -2,7 +2,7 @@ export const SITE = {
   name: "liju thomas",
   title: "site reliability engineer",
   location: "kalladikode, kerala, india",
-  bio: "i build reliable systems, ship fast, and keep things simple.",
+  bio: "site reliability engineer at aion. i build infra, ship fast, and keep things simple. open for side hustles — not in aion's space.",
   links: {
     work: { href: "https://aion.xyz", text: "aion.xyz" },
     internship: { href: "https://brototype.com", text: "brototype" },

@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
-import GenerativeBackground from "./components/GenerativeBackground";
 import Home from "./pages/Home";
 import ProjectPage from "./pages/ProjectPage";
 import CvPage from "./pages/CvPage";
@@ -16,7 +15,6 @@ function App() {
   return (
     <BrowserRouter>
       <Analytics />
-      <GenerativeBackground />
       <Chrome />
       <Routes>
         <Route path="/" element={<Home />} />

@@ -1,92 +1,53 @@
-@import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --bg: #0B37B8;
-  --fg: #ffffff;
-  --fg-muted: rgba(255,255,255,0.60);
-  --fg-faint: rgba(255,255,255,0.35);
-  --accent: #6B9FFF;
-  --accent-muted: rgba(107,159,255,0.20);
-  --highlight: #FF5757;
-  --border: rgba(255,255,255,0.08);
-  --code-bg: rgba(107,159,255,0.10);
-  --blockquote: rgba(255,255,255,0.45);
-  --paw: rgba(107,159,255,0.06);
+  --bg: #0a0a10;
+  --fg: #e4e8f0;
+  --fg-muted: #8892b0;
+  --fg-faint: #4a5578;
+  --accent: #64b5f6;
+  --accent-muted: rgba(100,181,246,0.12);
+  --border: rgba(100,181,246,0.08);
 }
 
 html,
 body {
-  font-family: "Architects Daughter", cursive;
-  background-color: var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #0d111d;
   color: var(--fg);
   min-height: 100vh;
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 1.45;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
 }
 
-#root {
-  min-height: 100vh;
-}
+#root { min-height: 100vh; }
 
 h1, h2, h3, h4 {
   color: var(--fg);
-  font-weight: 700;
-  -webkit-text-stroke: 0.5px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
-a {
-  color: var(--accent);
-  text-decoration: underline;
-  text-decoration-color: var(--accent-muted);
-  text-underline-offset: 3px;
-}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
 
-a:hover {
-  text-decoration-color: var(--accent);
-}
-
-hr {
-  border: none;
-  border-top: 1px solid var(--border);
-  margin: 1rem 0;
-}
+hr { border: none; border-top: 1px solid var(--border); margin: 1rem 0; }
 
 blockquote {
-  border-left: 2px solid var(--border);
+  border-left: 2px solid var(--accent-muted);
   padding-left: 1rem;
-  color: var(--blockquote);
+  color: var(--fg-muted);
 }
 
-::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
-}
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--fg-faint); border-radius: 2px; }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #6B9FFF;
-  border-radius: 2px;
-}
-
-html {
-  scrollbar-color: #6B9FFF transparent;
-  scrollbar-width: thin;
-}
-
-::selection {
-  background: rgba(107,159,255,0.30);
-  color: #fff;
-}
-
-@media (max-width: 639px) {
-  .neko { width: 32px !important; height: 32px !important; }
-}
+html { scrollbar-color: var(--fg-faint) transparent; scrollbar-width: thin; }
+::selection { background: var(--accent-muted); color: var(--fg); }

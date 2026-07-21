@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        mono: ['"Caveat"', "cursive"],
+        mono: ['"SF Mono"', "SFMono-Regular", "ui-monospace", "monospace"],
       },
       colors: {
         accent: {
