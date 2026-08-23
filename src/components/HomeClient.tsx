@@ -1,12 +1,14 @@
+"use client";
+
 import { useEffect, useState, useRef, Suspense, lazy, type PointerEvent } from "react";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-import { Link } from "react-router-dom";
-import { getProjects, type Project } from "../data/projects";
+import Link from "next/link";
+import type { Project } from "../data/projects";
 import { SITE } from "../data/site";
 
-const HeatTextWater = lazy(() => import("../components/HeatTextWater"));
+const HeatTextWater = lazy(() => import("./HeatTextWater"));
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -144,13 +146,8 @@ function DraggableAvatar() {
   );
 }
 
-export default function Home() {
-  const [projects, setProjects] = useState<Project[]>([]);
+export default function HomeClient({ projects }: { projects: Project[] }) {
   const shimmerReady = useIdle();
-
-  useEffect(() => {
-    setProjects(getProjects());
-  }, []);
 
   return (
     <>
@@ -188,7 +185,7 @@ export default function Home() {
           <a href={SITE.links.twitter} target="_blank" rel="noopener noreferrer" className="inline-block py-1.5 -my-1.5">twitter</a>
           <a href={SITE.links.instagram} target="_blank" rel="noopener noreferrer" className="inline-block py-1.5 -my-1.5">instagram</a>
           <a href={SITE.links.email} className="inline-block py-1.5 -my-1.5">email</a>
-          <Link to="/cv" className="inline-block py-1.5 -my-1.5">cv</Link>
+          <Link href="/cv" className="inline-block py-1.5 -my-1.5">cv</Link>
           <a href="/feed.xml" className="inline-block py-1.5 -my-1.5">rss</a>
         </nav>
       </header>
@@ -239,7 +236,7 @@ export default function Home() {
             <time className="text-[10px] text-[#6b6b6b] lowercase">
               {dayjs(meta.date).format("YYYY MMM DD")}
             </time>
-            <Link to={`/blog/${meta.slug}`} className="inline-block py-1.5 -my-1.5 text-[13px] lowercase font-medium text-[#1a1a1a]">
+            <Link href={`/blog/${meta.slug}`} className="inline-block py-1.5 -my-1.5 text-[13px] lowercase font-medium text-[#1a1a1a]">
               {meta.title}
             </Link>
             <p className="text-xs text-[#444444] lowercase leading-relaxed max-w-lg">

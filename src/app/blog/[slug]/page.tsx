@@ -1,9 +1,8 @@
-import { useEffect, useState, useMemo } from "react";
-import { useParams, Link } from "react-router-dom";
 import { marked } from "marked";
-import { getProject, type Project } from "../data/projects";
-import { slugify } from "../utils/slugify";
-import Toc from "../components/Toc";
+import Link from "next/link";
+import { getProject, getProjects } from "../../../data/projects";
+import { slugify } from "../../../utils/slugify";
+import Toc from "../../../components/Toc";
 
 marked.use({
   renderer: {
@@ -17,27 +16,34 @@ marked.use({
   },
 });
 
-export default function ProjectPage() {
-  const { slug } = useParams<{ slug: string }>();
-  const [project, setProject] = useState<Project | null>(null);
+export function generateStaticParams() {
+  return getProjects().map((p) => ({ slug: p.meta.slug }));
+}
 
-  useEffect(() => {
-    if (slug) {
-      const p = getProject(slug);
-      setProject(p || null);
-    }
-  }, [slug]);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const project = getProject(slug);
+  if (!project) return {};
+  return {
+    title: `${project.meta.title} — liju thomas`,
+    description: project.meta.description,
+  };
+}
 
-  const html = useMemo(() => (project ? (marked.parse(project.content) as string) : ""), [project]);
+export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const project = getProject(slug);
 
   if (!project) {
     return (
       <main className="relative z-10 max-w-screen-md px-6 sm:px-8 py-16">
         <p className="text-xs lowercase text-[#444444]">not found.</p>
-        <Link to="/" className="text-xs text-[#111111]">home</Link>
+        <Link href="/" className="text-xs text-[#111111]">home</Link>
       </main>
     );
   }
+
+  const html = marked.parse(project.content) as string;
 
   return (
     <>
@@ -74,7 +80,7 @@ export default function ProjectPage() {
           "
           dangerouslySetInnerHTML={{ __html: html }}
         />
-        <Link to="/" className="fixed top-4 left-4 z-40 text-xs text-[#6b6b6b] lowercase hover:text-[#111111]">← home</Link>
+        <Link href="/" className="fixed top-4 left-4 z-40 text-xs text-[#6b6b6b] lowercase hover:text-[#111111]">← home</Link>
       </main>
     </>
   );

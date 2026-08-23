@@ -1,3 +1,6 @@
+import fs from "node:fs";
+import path from "node:path";
+
 export interface ProjectMeta {
   title: string;
   description: string;
@@ -6,13 +9,12 @@ export interface ProjectMeta {
   photo?: string;
 }
 
-// Import all markdown files from _projects
-const mdModules = import.meta.glob("/_projects/*.md", { query: "?raw", import: "default", eager: true });
-
 export interface Project {
   meta: ProjectMeta;
   content: string;
 }
+
+const projectsDir = path.join(process.cwd(), "_projects");
 
 // Simple frontmatter parser (avoids gray-matter bundling)
 function parseFrontmatter(raw: string): { meta: Record<string, any>; content: string } {
@@ -32,8 +34,10 @@ function parseFrontmatter(raw: string): { meta: Record<string, any>; content: st
 
 export function getProjects(): Project[] {
   const projects: Project[] = [];
-  for (const [path, raw] of Object.entries(mdModules)) {
-    const { meta, content } = parseFrontmatter(raw as string);
+  const files = fs.readdirSync(projectsDir).filter((f) => f.endsWith(".md"));
+  for (const file of files) {
+    const raw = fs.readFileSync(path.join(projectsDir, file), "utf-8");
+    const { meta, content } = parseFrontmatter(raw);
     if (!meta.title || !meta.date || !meta.slug) continue;
     projects.push({ meta: meta as unknown as ProjectMeta, content });
   }
