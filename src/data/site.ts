@@ -45,7 +45,7 @@ export const SITE = {
       period: "2024–2025",
       location: "kochi",
       lines: [
-        "full stack development: react, node.js, typescript, postgres",
+        "built zenx, a competitive coding platform, from scratch: go, typescript, react, grpc, nats, docker sandboxing, postgres, mongodb, redis, prometheus, grafana, aws, gcp, kubernetes",
       ],
     },
   ],
