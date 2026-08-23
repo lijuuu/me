@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, Suspense, lazy, type PointerEvent } from "react";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { Link } from "react-router-dom";
 import { getProjects, type Project } from "../data/projects";
 import { SITE } from "../data/site";
+
+const HeatTextWater = lazy(() => import("../components/HeatTextWater"));
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -20,90 +22,227 @@ function ISTClock() {
   return <span>{time} ist</span>;
 }
 
+function BioText() {
+  return (
+    <p className="text-[13px] lowercase text-[#444444] leading-relaxed max-w-md">
+      {SITE.bio.map((line, i) => (
+        <span key={i}>
+          {line}
+          {i < SITE.bio.length - 1 && <br />}
+        </span>
+      ))}
+    </p>
+  );
+}
+
+// runs the WebGL shader compile/init off the critical rendering path: it's a
+// genuinely expensive main-thread task (~1.8s), so it waits for the browser
+// to be idle before mounting instead of blocking interactivity right away.
+function useIdle() {
+  const [idle, setIdle] = useState(false);
+  useEffect(() => {
+    const ric = (window as any).requestIdleCallback as ((cb: () => void) => number) | undefined;
+    const cancel = (window as any).cancelIdleCallback as ((id: number) => void) | undefined;
+    const id = ric ? ric(() => setIdle(true)) : window.setTimeout(() => setIdle(true), 300);
+    return () => {
+      if (ric && cancel) cancel(id);
+      else window.clearTimeout(id);
+    };
+  }, []);
+  return idle;
+}
+
+function DraggableAvatar() {
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [active, setActive] = useState(false);
+  const [matched, setMatched] = useState(false);
+  const [origin, setOrigin] = useState({ x: 0, y: 0 });
+  const dragging_ = useRef(false);
+  const start = useRef({ x: 0, y: 0, px: 0, py: 0 });
+  const anchorRef = useRef<HTMLDivElement>(null);
+
+  const showGuides = active && !matched;
+
+  const onPointerDown = (e: PointerEvent<HTMLImageElement>) => {
+    const el = anchorRef.current;
+    if (el) {
+      const r = el.getBoundingClientRect();
+      setOrigin({ x: r.left - pos.x + r.width / 2, y: r.top - pos.y + r.height / 2 });
+    }
+    dragging_.current = true;
+    setActive(true);
+    start.current = { x: pos.x, y: pos.y, px: e.clientX, py: e.clientY };
+    e.currentTarget.setPointerCapture(e.pointerId);
+  };
+  const onPointerMove = (e: PointerEvent<HTMLImageElement>) => {
+    if (!dragging_.current) return;
+    const nx = start.current.x + (e.clientX - start.current.px);
+    const ny = start.current.y + (e.clientY - start.current.py);
+    setPos({ x: nx, y: ny });
+    setMatched(Math.round(nx) === 0 && Math.round(ny) === 0);
+  };
+  const onPointerUp = () => {
+    dragging_.current = false;
+  };
+
+  const crosshairX = origin.x + pos.x;
+  const crosshairY = origin.y + pos.y;
+
+  return (
+    <>
+      {showGuides && (
+        <div className="fixed inset-0 z-10 pointer-events-none">
+          <div
+            style={{
+              position: "absolute",
+              left: 0,
+              top: crosshairY,
+              width: "100%",
+              height: 1,
+              background:
+                "repeating-linear-gradient(to right, rgba(51,85,238,0.35) 0 4px, transparent 4px 8px)",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: crosshairX,
+              width: 1,
+              height: "100%",
+              background:
+                "repeating-linear-gradient(to bottom, rgba(51,85,238,0.35) 0 4px, transparent 4px 8px)",
+            }}
+          />
+        </div>
+      )}
+      <div ref={anchorRef} className="relative z-20 w-[88px] h-[88px]">
+        {showGuides && (
+          <div className="absolute inset-0 border border-dashed border-black/30 rounded-sm pointer-events-none" />
+        )}
+        <div style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }} className="relative w-[88px] h-[88px]">
+          <img
+            src="/avatar.webp"
+            alt=""
+            width={88}
+            height={88}
+            draggable={false}
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={onPointerUp}
+            style={{ touchAction: "none" }}
+            className="w-[88px] h-[88px] rounded-sm object-cover shadow-[0_4px_16px_rgba(17,17,17,0.18)] cursor-grab active:cursor-grabbing select-none"
+          />
+          {showGuides && (
+            <div className="absolute top-full left-0 w-full mt-1.5 text-[10px] leading-none text-[#3355ee] pointer-events-none whitespace-nowrap">
+              x {Math.round(pos.x)} y {Math.round(pos.y)}
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  );
+}
+
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>([]);
+  const shimmerReady = useIdle();
 
   useEffect(() => {
     setProjects(getProjects());
   }, []);
 
   return (
-    <main className="relative z-10 max-w-screen-md px-6 sm:px-8 py-16 flex flex-col gap-8">
+    <>
+    <main className="relative z-10 max-w-screen-md px-6 sm:px-8 pt-16 flex flex-col gap-8">
       <header className="flex flex-col gap-3">
-        <img src="/hello_blue_dino.gif" alt="" className="w-14 h-14" />
-        <h1 className="text-xl font-semibold lowercase tracking-tight text-[#64b5f6]">
+        <DraggableAvatar />
+        <h1 className="text-xl font-bold lowercase tracking-tight text-[#111111]">
           {SITE.name}
         </h1>
-        <p className="text-[13px] lowercase text-[#8892b0] leading-relaxed max-w-md">
-          {SITE.bio}
-        </p>
-        <p className="text-xs text-[#4a5578]">
+        {shimmerReady ? (
+        <Suspense fallback={<BioText />}>
+          <HeatTextWater
+            lines={[...SITE.bio]}
+            fontSize={13}
+            fontWeight={400}
+            color="#444444"
+            backgroundColor="#ececec"
+            waves={0.022}
+            caustic={0.009}
+            layering={0.018}
+            size={0.8}
+            speed={0.5}
+            blur={0.5}
+          />
+        </Suspense>
+        ) : (
+          <BioText />
+        )}
+        <p className="text-xs text-[#6b6b6b]">
           {SITE.location} · <ISTClock />
         </p>
-        <nav className="flex gap-4 text-[12px] text-[#4a5578] lowercase">
-          <a href={SITE.links.github} target="_blank" rel="noopener noreferrer">github</a>
-          <a href={SITE.links.linkedin} target="_blank" rel="noopener noreferrer">linkedin</a>
-          <a href={SITE.links.twitter} target="_blank" rel="noopener noreferrer">twitter</a>
-          <a href={SITE.links.instagram} target="_blank" rel="noopener noreferrer">instagram</a>
-          <a href={SITE.links.email}>email</a>
-          <Link to="/cv">cv</Link>
-          <a href="/feed.xml">rss</a>
+        <nav className="flex gap-4 text-[12px] text-[#6b6b6b] lowercase">
+          <a href={SITE.links.github} target="_blank" rel="noopener noreferrer" className="inline-block py-1.5 -my-1.5">github</a>
+          <a href={SITE.links.linkedin} target="_blank" rel="noopener noreferrer" className="inline-block py-1.5 -my-1.5">linkedin</a>
+          <a href={SITE.links.twitter} target="_blank" rel="noopener noreferrer" className="inline-block py-1.5 -my-1.5">twitter</a>
+          <a href={SITE.links.instagram} target="_blank" rel="noopener noreferrer" className="inline-block py-1.5 -my-1.5">instagram</a>
+          <a href={SITE.links.email} className="inline-block py-1.5 -my-1.5">email</a>
+          <Link to="/cv" className="inline-block py-1.5 -my-1.5">cv</Link>
+          <a href="/feed.xml" className="inline-block py-1.5 -my-1.5">rss</a>
         </nav>
       </header>
 
-      <section className="flex flex-col gap-4">
+      <section className="flex flex-col gap-4 pt-6 border-t border-dashed border-black/12">
         {SITE.work.map((w, i) => (
           <div key={i} className="flex flex-col gap-1">
-            <p className="text-xs text-[#4a5578] lowercase">
-              {w.role} at <a href={w.url} target="_blank" rel="noopener noreferrer" className="text-[#64b5f6]">{w.company}</a> · {w.location}, {w.period}
+            <p className="text-xs text-[#6b6b6b] lowercase">
+              {w.role} at <a href={w.url} target="_blank" rel="noopener noreferrer" className="text-[#111111]">{w.company}</a> · {w.location}, {w.period}
             </p>
             <ul className="flex flex-col gap-0.5">
               {w.lines.map((line, j) => (
-                <li key={j} className="text-[13px] text-[#8892b0] lowercase leading-relaxed max-w-lg">{line}</li>
+                <li key={j} className="text-[13px] text-[#444444] lowercase leading-relaxed max-w-lg">{line}</li>
               ))}
             </ul>
           </div>
         ))}
       </section>
 
-      <section className="flex flex-col gap-1">
-        <h2 className="text-[11px] text-[#64b5f6]/60 lowercase font-medium tracking-wider">projects</h2>
+      <section className="flex flex-col gap-1 pt-6 border-t border-dashed border-black/12">
+        <h2 className="text-[11px] text-[#111111]/60 lowercase font-medium tracking-wider">projects</h2>
         <a href="https://zenx.lijuu.me" target="_blank" rel="noopener noreferrer"
-           className="text-sm lowercase font-medium text-[#c8d6e5]">
+           className="inline-block py-1.5 -my-1.5 text-sm lowercase font-medium text-[#1a1a1a]">
           zenx — competitive coding platform
         </a>
         <a href="https://github.com/zenxbattle" target="_blank" rel="noopener noreferrer"
-           className="text-xs text-[#8892b0] lowercase">
+           className="inline-block py-1.5 -my-1.5 text-xs text-[#444444] lowercase">
           source code: github.com/zenxbattle
         </a>
-        <p className="text-xs text-[#4a5578] lowercase leading-relaxed max-w-lg mt-0.5">
+        <p className="text-xs text-[#6b6b6b] lowercase leading-relaxed max-w-lg mt-0.5">
           go, typescript, react, gRPC, nats, docker sandbox, postgres, mongodb, redis, prometheus, grafana, betterstack, aws, gcp, kubernetes
         </p>
       </section>
 
-      {false && <section className="flex flex-col gap-2">
-        <h2 className="text-[11px] text-[#64b5f6]/60 lowercase font-medium tracking-wider">writing</h2>
+      <section className="flex flex-col gap-2 pt-6 border-t border-dashed border-black/12">
+        <h2 className="text-[11px] text-[#111111]/60 lowercase font-medium tracking-wider">writing</h2>
         <div className="flex flex-col gap-3">
         {projects.map(({ meta }) => (
           <article key={meta.slug} className="flex flex-col gap-0.5">
-            <time className="text-[10px] text-[#4a5578]/70 lowercase">
+            <time className="text-[10px] text-[#6b6b6b] lowercase">
               {dayjs(meta.date).format("YYYY MMM DD")}
             </time>
-            <Link to={`/blog/${meta.slug}`} className="text-[13px] lowercase font-medium text-[#c8d6e5]">
+            <Link to={`/blog/${meta.slug}`} className="inline-block py-1.5 -my-1.5 text-[13px] lowercase font-medium text-[#1a1a1a]">
               {meta.title}
             </Link>
-            <p className="text-xs text-[#8892b0] lowercase leading-relaxed max-w-lg">
+            <p className="text-xs text-[#444444] lowercase leading-relaxed max-w-lg">
               {meta.description}
             </p>
           </article>
         ))}
         </div>
-      </section>}
+      </section>
 
-      <footer className="text-[11px] text-[#4a5578] lowercase flex flex-col gap-0.5">
-        <p>keep it simple</p>
-        <p>build, scale, observe. repeat.</p>
-      </footer>
     </main>
+    </>
   );
 }

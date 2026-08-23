@@ -3,19 +3,19 @@
 @tailwind utilities;
 
 :root {
-  --bg: #0a0a10;
-  --fg: #e4e8f0;
-  --fg-muted: #8892b0;
-  --fg-faint: #4a5578;
-  --accent: #64b5f6;
-  --accent-muted: rgba(100,181,246,0.12);
-  --border: rgba(100,181,246,0.08);
+  --bg: #ececec;
+  --fg: #111111;
+  --fg-muted: #555555;
+  --fg-faint: #8a8a8a;
+  --accent: #111111;
+  --accent-muted: rgba(17,17,17,0.1);
+  --border: rgba(17,17,17,0.12);
 }
 
 html,
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  background-color: #0d111d;
+  font-family: "Helvetica Neue", Helvetica, Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #ececec;
   color: var(--fg);
   min-height: 100vh;
   font-size: 14px;
@@ -30,7 +30,7 @@ body {
 
 h1, h2, h3, h4 {
   color: var(--fg);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.02em;
 }
 
@@ -49,5 +49,5 @@ blockquote {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--fg-faint); border-radius: 2px; }
 
-html { scrollbar-color: var(--fg-faint) transparent; scrollbar-width: thin; }
+html { scrollbar-color: var(--fg-faint) transparent; scrollbar-width: thin; scroll-behavior: smooth; }
 ::selection { background: var(--accent-muted); color: var(--fg); }

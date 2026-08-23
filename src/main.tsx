@@ -1,11 +1,12 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import Home from "./pages/Home";
-import ProjectPage from "./pages/ProjectPage";
-import CvPage from "./pages/CvPage";
 import "./styles/globals.css";
+
+const ProjectPage = lazy(() => import("./pages/ProjectPage"));
+const CvPage = lazy(() => import("./pages/CvPage"));
 
 function Chrome() {
   return null;
@@ -16,11 +17,13 @@ function App() {
     <BrowserRouter>
       <Analytics />
       <Chrome />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/blog/:slug" element={<ProjectPage />} />
-        <Route path="/cv" element={<CvPage />} />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blog/:slug" element={<ProjectPage />} />
+          <Route path="/cv" element={<CvPage />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }

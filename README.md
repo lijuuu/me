@@ -28,7 +28,7 @@ pnpm build
 
 ```
 src/
-  components/   — react components (Cat, ThemeToggle, BlogSearch, etc.)
+  components/   — react components (Toc, etc.)
   pages/        — home page, project page
   data/         — project list
   styles/       — global css

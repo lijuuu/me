@@ -3,23 +3,21 @@
   <channel>
     <title>liju thomas</title>
     <link>https://lijuu.me</link>
-    <description>generalist — go, distributed systems, react, typescript. building things that scale.</description>
+    <description>site reliability engineer — infra, go, distributed systems.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 13 May 2026 00:00:00 +0000</lastBuildDate>
-    <managingEditor>lijuthomasliju03@gmail.com (liju thomas)</managingEditor>
-    <webMaster>lijuthomasliju03@gmail.com (liju thomas)</webMaster>
+    <lastBuildDate>Sun, 23 Aug 2026 10:47:55 GMT</lastBuildDate>
     <atom:link href="https://lijuu.me/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
-      <url>https://avatars.githubusercontent.com/u/34997667?v=4</url>
+      <url>https://lijuu.me/favicon.ico</url>
       <title>liju thomas</title>
       <link>https://lijuu.me</link>
     </image>
     <item>
-      <title>zenx — competitive coding platform</title>
-      <link>https://zenx.lijuu.me</link>
-      <guid isPermaLink="true">https://zenx.lijuu.me</guid>
-      <description><![CDATA[go, typescript, react, gRPC, nats, docker sandbox, postgres, mongodb, redis, prometheus, grafana, betterstack, aws, gcp, kubernetes]]></description>
-      <pubDate>Wed, 13 May 2026 00:00:00 +0000</pubDate>
+      <title>how firecracker works</title>
+      <link>https://lijuu.me/blog/how-firecracker-works</link>
+      <guid isPermaLink="true">https://lijuu.me/blog/how-firecracker-works</guid>
+      <description><![CDATA[a deep dive into aws's microvm technology that powers lambda and fargate]]></description>
+      <pubDate>Tue, 15 Jul 2025 00:00:00 GMT</pubDate>
     </item>
   </channel>
 </rss>

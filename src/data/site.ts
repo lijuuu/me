@@ -2,7 +2,11 @@ export const SITE = {
   name: "liju thomas",
   title: "site reliability engineer",
   location: "kalladikode, kerala, india",
-  bio: "site reliability engineer at aion. i build infra, ship fast, and keep things simple. open for side hustles — not in aion's space.",
+  bio: [
+    "site reliability engineer at aion.",
+    "i build infra, ship fast, and keep things simple.",
+    "open for side hustles.",
+  ],
   links: {
     work: { href: "https://aion.xyz", text: "aion.xyz" },
     internship: { href: "https://brototype.com", text: "brototype" },
@@ -14,16 +18,24 @@ export const SITE = {
   },
   work: [
     {
-      role: "swe",
+      role: "sre",
       company: "aion.xyz",
       url: "https://aion.xyz",
       period: "2025–ongoing",
       location: "bangalore",
       lines: [
-        "building microservice systems in go — api gateways, event-driven services, grpc",
-        "sre — observability, incident response, capacity planning, reliability engineering",
-        "platform engineering — eks, karpenter autoscaling, gitops with helm + argocd",
-        "operating full o11y stack — prometheus, loki distributed, grafana",
+        "platform engineering: kubernetes on eks provisioned with terraform, autoscaling with karpenter, and gitops with argocd + helm",
+        "sre, covering observability, incident response, capacity planning, and reliability engineering",
+        "operating the full o11y stack: prometheus, loki in distributed mode, and grafana",
+        "architected the cluster, networking, and observability (tempo tracing, oidc) for project meridian, aion's terraform-managed eks platform built for rezolve",
+        "added canary deployments via argo rollouts, using nginx ingress for traffic shaping and prometheus-backed analysistemplates for automated analysis runs",
+        "built the go agent installed on every aion node, pulling user-submitted tasks through systemd/k8s task drivers, with sqlite+wal for local state, full audit logging, and m2m bootstrap auth; also built the grpc backend services behind it alone, on postgres, exposed through grpc-gateway",
+        "traced gpu vm spin-up time end to end, through api timestamps, k8s events, virt-launcher/qemu logs, and cloud-init timing, then found the chokepoints and reworked the flow for a 10% gain",
+        "added a cache pvc for the notebook addon, using cdi smart-clone on longhorn and uv for fast installs, cutting its spin-up time",
+        "built the marimo notebook addon for aion's gpu vms, plus port forwarding for them, using nginx for port exposure and network policies for isolation",
+        "building microservice systems in go, working on the kong api gateway, event-driven services, and grpc",
+        "built aion-cli alone in go, with a bubbletea/lipgloss tui, covering ~90% of aion's core apis",
+        "worked on aion's console (next.js): gpu/k8s provisioning flows, rjsf-driven config forms, zustand + indexeddb state, shipped across many releases",
       ],
     },
     {
@@ -33,7 +45,7 @@ export const SITE = {
       period: "2024–2025",
       location: "kochi",
       lines: [
-        "full stack development — react, node.js, typescript, postgres",
+        "full stack development: react, node.js, typescript, postgres",
       ],
     },
   ],
