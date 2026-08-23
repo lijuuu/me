@@ -203,7 +203,7 @@ export default function Home() {
             </p>
             <ul className="flex flex-col gap-0.5">
               {w.lines.map((line, j) => (
-                <li key={j} className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-lg">
+                <li key={j} className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
                   <span aria-hidden="true">-</span>
                   <span>{line}</span>
                 </li>
