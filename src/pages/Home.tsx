@@ -193,10 +193,11 @@ export default function Home() {
         </nav>
       </header>
 
-      <section className="flex flex-col gap-4 pt-6 border-t border-dashed border-black/12">
+      <section className="flex flex-col gap-2 pt-6 border-t border-dashed border-black/12">
         <h2 className="text-[11px] text-[#111111]/60 lowercase font-medium tracking-wider">work</h2>
+        <div className="flex flex-col gap-3">
         {SITE.work.map((w, i) => (
-          <div key={i} className="flex flex-col gap-1">
+          <div key={i} className="flex flex-col gap-0.5">
             <p className="text-xs text-[#6b6b6b] lowercase">
               {w.role} at <a href={w.url} target="_blank" rel="noopener noreferrer" className="text-[#111111]">{w.company}</a> · {w.location}, {w.period}
             </p>
@@ -207,10 +208,12 @@ export default function Home() {
             </ul>
           </div>
         ))}
+        </div>
       </section>
 
-      <section className="flex flex-col gap-1 pt-6 border-t border-dashed border-black/12">
+      <section className="flex flex-col gap-2 pt-6 border-t border-dashed border-black/12">
         <h2 className="text-[11px] text-[#111111]/60 lowercase font-medium tracking-wider">projects</h2>
+        <div className="flex flex-col gap-0.5">
         <a href="https://zenx.lijuu.me" target="_blank" rel="noopener noreferrer"
            className="inline-block py-1.5 -my-1.5 text-sm lowercase font-medium text-[#1a1a1a]">
           zenx — competitive coding platform
@@ -219,9 +222,10 @@ export default function Home() {
            className="inline-block py-1.5 -my-1.5 text-xs text-[#444444] lowercase">
           source code: github.com/zenxbattle
         </a>
-        <p className="text-xs text-[#6b6b6b] lowercase leading-relaxed max-w-lg mt-0.5">
+        <p className="text-xs text-[#6b6b6b] lowercase leading-relaxed max-w-lg">
           go, typescript, react, gRPC, nats, docker sandbox, postgres, mongodb, redis, prometheus, grafana, betterstack, aws, gcp, kubernetes
         </p>
+        </div>
       </section>
 
       <section className="flex flex-col gap-2 pt-6 border-t border-dashed border-black/12">
