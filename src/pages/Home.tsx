@@ -67,7 +67,7 @@ function DraggableAvatar() {
     const el = anchorRef.current;
     if (el) {
       const r = el.getBoundingClientRect();
-      setOrigin({ x: r.left - pos.x + r.width / 2, y: r.top - pos.y + r.height / 2 });
+      setOrigin({ x: r.left + r.width / 2, y: r.top + r.height / 2 });
     }
     dragging_.current = true;
     setActive(true);
