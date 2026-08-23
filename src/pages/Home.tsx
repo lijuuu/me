@@ -194,6 +194,7 @@ export default function Home() {
       </header>
 
       <section className="flex flex-col gap-4 pt-6 border-t border-dashed border-black/12">
+        <h2 className="text-[11px] text-[#111111]/60 lowercase font-medium tracking-wider">work</h2>
         {SITE.work.map((w, i) => (
           <div key={i} className="flex flex-col gap-1">
             <p className="text-xs text-[#6b6b6b] lowercase">
