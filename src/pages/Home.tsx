@@ -154,7 +154,7 @@ export default function Home() {
 
   return (
     <>
-    <main className="relative z-10 max-w-screen-md px-6 sm:px-8 pt-16 flex flex-col gap-8">
+    <main className="relative z-10 max-w-screen-md px-6 sm:px-8 pt-16 pb-16 flex flex-col gap-8">
       <header className="flex flex-col gap-3">
         <DraggableAvatar />
         <h1 className="text-xl font-bold lowercase tracking-tight text-[#111111]">
@@ -223,7 +223,7 @@ export default function Home() {
         </p>
       </section>
 
-      <section className="flex flex-col gap-2 pt-10 border-t border-dashed border-black/12">
+      <section className="flex flex-col gap-2 pt-6 border-t border-dashed border-black/12">
         <h2 className="text-[11px] text-[#111111]/60 lowercase font-medium tracking-wider">writing</h2>
         <div className="flex flex-col gap-3">
         {projects.map(({ meta }) => (
