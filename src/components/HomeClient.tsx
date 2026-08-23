@@ -186,6 +186,7 @@ export default function HomeClient({ projects }: { projects: Project[] }) {
           <a href={SITE.links.instagram} target="_blank" rel="noopener noreferrer" className="inline-block py-1.5 -my-1.5">instagram</a>
           <a href={SITE.links.email} className="inline-block py-1.5 -my-1.5">email</a>
           <Link href="/cv" className="inline-block py-1.5 -my-1.5">cv</Link>
+          <Link href="/paste" className="inline-block py-1.5 -my-1.5">paste</Link>
           <a href="/feed.xml" className="inline-block py-1.5 -my-1.5">rss</a>
         </nav>
       </header>
