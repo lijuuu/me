@@ -223,7 +223,7 @@ export default function Home() {
         </p>
       </section>
 
-      <section className="flex flex-col gap-2 pt-6 border-t border-dashed border-black/12">
+      <section className="flex flex-col gap-2 pt-10 border-t border-dashed border-black/12">
         <h2 className="text-[11px] text-[#111111]/60 lowercase font-medium tracking-wider">writing</h2>
         <div className="flex flex-col gap-3">
         {projects.map(({ meta }) => (

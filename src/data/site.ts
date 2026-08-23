@@ -28,7 +28,7 @@ export const SITE = {
         "sre, covering observability, incident response, capacity planning, and reliability engineering",
         "operating the full o11y stack: prometheus, loki in distributed mode, and grafana",
         "architected the cluster, networking, and observability (tempo tracing, oidc) for project meridian, aion's terraform-managed eks platform built for rezolve",
-        "added canary deployments via argo rollouts, using nginx ingress for traffic shaping and prometheus-backed analysistemplates for automated analysis runs",
+        "added canary deployments via argo rollouts on the helm chart, flexible enough to run real traffic shaping through nginx ingress or plain pod-count shaping through kube-proxy alone, with prometheus-backed analysistemplates for automated analysis runs",
         "built the go agent installed on every aion node, pulling user-submitted tasks through systemd/k8s task drivers, with sqlite+wal for local state, full audit logging, and m2m bootstrap auth; also built the grpc backend services behind it alone, on postgres, exposed through grpc-gateway",
         "traced gpu vm spin-up time end to end, through api timestamps, k8s events, virt-launcher/qemu logs, and cloud-init timing, then found the chokepoints and reworked the flow for a 10% gain",
         "added a cache pvc for the notebook addon, using cdi smart-clone on longhorn and uv for fast installs, cutting its spin-up time",
