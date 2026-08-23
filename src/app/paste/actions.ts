@@ -35,5 +35,5 @@ export async function createPaste(formData: FormData) {
     expiresAt: new Date(now.getTime() + ms),
   });
 
-  redirect(`/paste/${id}`);
+  redirect(`/paste/${id}?new=1`);
 }

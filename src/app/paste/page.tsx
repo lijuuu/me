@@ -1,4 +1,5 @@
 import { createPaste } from "./actions";
+import MyPastes from "../../components/MyPastes";
 
 export const metadata = { title: "paste — liju thomas" };
 
@@ -52,6 +53,8 @@ export default function PastePage() {
           </button>
         </div>
       </form>
+
+      <MyPastes />
     </main>
   );
 }

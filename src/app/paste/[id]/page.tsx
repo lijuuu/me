@@ -4,11 +4,19 @@ import { renderMarkdown } from "../../../lib/markdown";
 import { highlightCode } from "../../../lib/highlight";
 import Prose from "../../../components/Prose";
 import CopyButton from "../../../components/CopyButton";
+import TrackPaste from "../../../components/TrackPaste";
 
 export const dynamic = "force-dynamic";
 
-export default async function PasteViewPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function PasteViewPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ new?: string }>;
+}) {
   const { id } = await params;
+  const { new: isNew } = await searchParams;
   const pastes = await pastesCollection();
   const paste = await pastes.findOne({ _id: id });
 
@@ -23,6 +31,9 @@ export default async function PasteViewPage({ params }: { params: Promise<{ id: 
 
   return (
     <main className="relative z-10 max-w-screen-md px-6 sm:px-8 pt-16 pb-16 flex flex-col gap-4 lowercase">
+      {isNew === "1" && (
+        <TrackPaste id={id} type={paste.type} createdAt={paste.createdAt.toISOString()} />
+      )}
       <Link href="/" className="fixed top-4 left-4 z-40 text-xs text-[#6b6b6b] lowercase hover:text-[#111111]">← home</Link>
       <div className="fixed top-4 right-4 z-40">
         <CopyButton content={paste.content} />
