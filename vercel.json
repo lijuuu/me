@@ -1,4 +1,5 @@
 {
+  "framework": "nextjs",
   "headers": [
     {
       "source": "/(.*\\.(?:webp|png|jpg|jpeg|svg|ico|pdf))",
