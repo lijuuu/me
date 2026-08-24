@@ -186,8 +186,6 @@ export default function HomeClient({ projects }: { projects: Project[] }) {
           <a href={SITE.links.instagram} target="_blank" rel="noopener noreferrer" className="inline-block py-1.5 -my-1.5">instagram</a>
           <a href={SITE.links.email} className="inline-block py-1.5 -my-1.5">email</a>
           <Link href="/cv" className="inline-block py-1.5 -my-1.5">cv</Link>
-          <Link href="/paste" className="inline-block py-1.5 -my-1.5">paste</Link>
-          <a href="/feed.xml" className="inline-block py-1.5 -my-1.5">rss</a>
         </nav>
       </header>
 
@@ -225,6 +223,9 @@ export default function HomeClient({ projects }: { projects: Project[] }) {
         </a>
         <p className="text-xs text-[#6b6b6b] lowercase leading-relaxed max-w-lg">
           go, typescript, react, gRPC, nats, docker sandbox, postgres, mongodb, redis, prometheus, grafana, betterstack, aws, gcp, kubernetes
+        </p>
+        <p className="text-xs text-[#6b6b6b] lowercase leading-relaxed max-w-lg">
+          the challenge service keeps live battle state in-process, backs it with redis (leaderboards via redisboard, a library i built separately), and on graceful shutdown flushes it to mongo for permanent history.
         </p>
         </div>
       </section>
