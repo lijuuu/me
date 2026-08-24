@@ -69,7 +69,7 @@ function DraggableAvatar() {
     const el = anchorRef.current;
     if (el) {
       const r = el.getBoundingClientRect();
-      setOrigin({ x: r.left + r.width / 2, y: r.top + r.height / 2 });
+      setOrigin({ x: r.left + r.width / 2 + window.scrollX, y: r.top + r.height / 2 + window.scrollY });
     }
     dragging_.current = true;
     setActive(true);
@@ -93,7 +93,7 @@ function DraggableAvatar() {
   return (
     <>
       {showGuides && (
-        <div className="fixed inset-0 z-10 pointer-events-none">
+        <div className="absolute inset-0 z-10 pointer-events-none">
           <div
             style={{
               position: "absolute",
