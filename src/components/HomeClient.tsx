@@ -59,11 +59,20 @@ function DraggableAvatar() {
   const [active, setActive] = useState(false);
   const [matched, setMatched] = useState(false);
   const [origin, setOrigin] = useState({ x: 0, y: 0 });
+  const [scroll, setScroll] = useState({ x: 0, y: 0 });
   const dragging_ = useRef(false);
   const start = useRef({ x: 0, y: 0, px: 0, py: 0 });
   const anchorRef = useRef<HTMLDivElement>(null);
 
   const showGuides = active && !matched;
+
+  useEffect(() => {
+    if (!showGuides) return;
+    const onScroll = () => setScroll({ x: window.scrollX, y: window.scrollY });
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [showGuides]);
 
   const onPointerDown = (e: PointerEvent<HTMLImageElement>) => {
     const el = anchorRef.current;
@@ -87,13 +96,13 @@ function DraggableAvatar() {
     dragging_.current = false;
   };
 
-  const crosshairX = origin.x + pos.x;
-  const crosshairY = origin.y + pos.y;
+  const crosshairX = origin.x + pos.x - scroll.x;
+  const crosshairY = origin.y + pos.y - scroll.y;
 
   return (
     <>
       {showGuides && (
-        <div className="absolute inset-0 z-10 pointer-events-none">
+        <div className="fixed inset-0 z-10 pointer-events-none">
           <div
             style={{
               position: "absolute",
