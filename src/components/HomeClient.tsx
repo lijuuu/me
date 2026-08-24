@@ -212,21 +212,140 @@ export default function HomeClient({ projects }: { projects: Project[] }) {
 
       <section className="flex flex-col gap-2 pt-6 border-t border-dashed border-black/12">
         <h2 className="text-[11px] text-[#111111]/60 lowercase font-medium tracking-wider">projects</h2>
+        <div className="flex flex-col gap-4">
+
         <div className="flex flex-col gap-0.5">
-        <a href="https://zenx.lijuu.me" target="_blank" rel="noopener noreferrer"
-           className="inline-block py-1.5 -my-1.5 text-sm lowercase font-medium text-[#1a1a1a]">
-          zenx — competitive coding platform
-        </a>
-        <a href="https://github.com/zenxbattle" target="_blank" rel="noopener noreferrer"
-           className="inline-block py-1.5 -my-1.5 text-xs text-[#444444] lowercase">
-          source code: github.com/zenxbattle
-        </a>
-        <p className="text-xs text-[#6b6b6b] lowercase leading-relaxed max-w-lg">
-          go, typescript, react, gRPC, nats, docker sandbox, postgres, mongodb, redis, prometheus, grafana, betterstack, aws, gcp, kubernetes
-        </p>
-        <p className="text-xs text-[#6b6b6b] lowercase leading-relaxed max-w-lg">
-          the challenge service keeps live battle state in-process, backs it with redis (leaderboards via redisboard, a library i built separately), and on graceful shutdown flushes it to mongo for permanent history.
-        </p>
+          <a href="https://zenx.lijuu.me" target="_blank" rel="noopener noreferrer"
+             className="inline-block py-1.5 -my-1.5 text-sm lowercase font-medium text-[#1a1a1a]">
+            zenx — competitive coding platform
+          </a>
+          <a href="https://github.com/zenxbattle" target="_blank" rel="noopener noreferrer"
+             className="inline-block py-1.5 -my-1.5 text-xs text-[#444444] lowercase">
+            source code: github.com/zenxbattle
+          </a>
+          <p className="text-xs text-[#6b6b6b] lowercase leading-relaxed max-w-lg">
+            go, typescript, react, gRPC, nats, docker sandbox, postgres, mongodb, redis, prometheus, grafana, aws, gcp, kubernetes
+          </p>
+          <ul className="flex flex-col gap-0.5 mt-1">
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>api gateway: go + gin, the single rest entrypoint proxying grpc to every service, with prometheus metrics, ip-based rate limiting, and a ristretto cache used as a jwt blacklist store</span>
+            </li>
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>auth &amp; user service: grpc, postgres via gorm, redis session cache, jwt issuance and rotation, totp-based 2fa, role-based admin controls</span>
+            </li>
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>problem service: mongodb for problems and test cases, redis cache, nats for async solution validation, redisboard for problem-level leaderboards</span>
+            </li>
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>code execution engine: docker-sandboxed judging for python, javascript, c++, and go, dispatched through a nats-driven worker pool</span>
+            </li>
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>challenge service: local in-process state for live battles, redis-backed shared state, leaderboard backed via redisboard (sorted linkedlists), reads fall back to mongo once a challenge's been archived, graceful shutdown flushes completed challenges to mongo for permanent history and snapshots current matches in redis to .rdb</span>
+            </li>
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>frontend: react 19, vite, typescript, shadcn/ui, a real-time battle arena over websockets using a dispatch pattern</span>
+            </li>
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>commonproto: a global proto store, the single source of truth for every service's grpc contracts</span>
+            </li>
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>infra: terraform for cloud bootstrap and core (vpc, ecr, route53, eks), k3s + kustomize on-prem, argocd gitops, prometheus/grafana monitoring</span>
+            </li>
+          </ul>
+        </div>
+
+        <div className="flex flex-col gap-0.5">
+          <a href="https://github.com/lijuuu/RedisBoard" target="_blank" rel="noopener noreferrer"
+             className="inline-block py-1.5 -my-1.5 text-sm lowercase font-medium text-[#1a1a1a]">
+            redisboard — redis-backed leaderboard library
+          </a>
+          <a href="https://github.com/lijuuu/RedisBoard" target="_blank" rel="noopener noreferrer"
+             className="inline-block py-1.5 -my-1.5 text-xs text-[#444444] lowercase">
+            source code: github.com/lijuuu/redisboard
+          </a>
+          <p className="text-xs text-[#6b6b6b] lowercase leading-relaxed max-w-lg">
+            go, redis
+          </p>
+          <ul className="flex flex-col gap-0.5 mt-1">
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>atomic, pipelined score updates and o(log n) top-k / rank queries over redis sorted sets</span>
+            </li>
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>namespaced per leaderboard, built to scale to ~1m users and 200 entities</span>
+            </li>
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>the leaderboard engine behind zenx's problem and challenge services</span>
+            </li>
+          </ul>
+        </div>
+
+        <div className="flex flex-col gap-0.5">
+          <a href="https://github.com/lijuuu/FoodBuddyMonolithBackend" target="_blank" rel="noopener noreferrer"
+             className="inline-block py-1.5 -my-1.5 text-sm lowercase font-medium text-[#1a1a1a]">
+            foodbuddy — food ordering & restaurant platform
+          </a>
+          <a href="https://github.com/lijuuu/FoodBuddyMonolithBackend" target="_blank" rel="noopener noreferrer"
+             className="inline-block py-1.5 -my-1.5 text-xs text-[#444444] lowercase">
+            source code: github.com/lijuuu/foodbuddymonolithbackend
+          </a>
+          <p className="text-xs text-[#6b6b6b] lowercase leading-relaxed max-w-lg">
+            go, gin, mysql, gorm, grpc, docker, kubernetes
+          </p>
+          <ul className="flex flex-col gap-0.5 mt-1">
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>started as a go + gin monolith: gorm/mysql, google oauth, jwt sessions, stripe + razorpay payments, cloudinary uploads, smtp notifications</span>
+            </li>
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>re-architected into grpc microservices (api gateway, user, restaurant + product, order + cart, admin auth), with a centralized proto repo as the shared contract source</span>
+            </li>
+          </ul>
+        </div>
+
+        <div className="flex flex-col gap-0.5">
+          <a href="https://github.com/lijuuu/shrtn" target="_blank" rel="noopener noreferrer"
+             className="inline-block py-1.5 -my-1.5 text-sm lowercase font-medium text-[#1a1a1a]">
+            shrtn — a url shortener built to scale
+          </a>
+          <a href="https://github.com/lijuuu/shrtn" target="_blank" rel="noopener noreferrer"
+             className="inline-block py-1.5 -my-1.5 text-xs text-[#444444] lowercase">
+            source code: github.com/lijuuu/shrtn
+          </a>
+          <p className="text-xs text-[#6b6b6b] lowercase leading-relaxed max-w-lg">
+            python, django, postgres, redis, scylladb
+          </p>
+          <ul className="flex flex-col gap-0.5 mt-1">
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>postgres for entity data: users, organizations, namespaces, url metadata</span>
+            </li>
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>redis as a cache layer in front of the hot paths</span>
+            </li>
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>scylladb holds the short-url lookup table itself, since resolving a short code is the highest-read path by far</span>
+            </li>
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>partitioned by (namespace, shortcode), a single-partition-key lookup with predictable routing per redirect, plus a separate click-analytics table clustered by date, since scylla's wide-column model is well suited to high-volume, append-heavy event workloads</span>
+            </li>
+          </ul>
+        </div>
+
         </div>
       </section>
 
