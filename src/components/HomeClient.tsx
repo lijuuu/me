@@ -21,7 +21,7 @@ function ISTClock() {
     const iv = setInterval(tick, 1000);
     return () => clearInterval(iv);
   }, []);
-  return <span>{time} ist</span>;
+ return <span>{time} ist</span>;
 }
 
 function BioText() {
@@ -351,6 +351,38 @@ export default function HomeClient({ projects }: { projects: Project[] }) {
             <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
               <span aria-hidden="true">-</span>
               <span>partitioned by (namespace, shortcode), a single-partition-key lookup with predictable routing per redirect, plus a separate click-analytics table clustered by date, since scylla's wide-column model is well suited to high-volume, append-heavy event workloads</span>
+            </li>
+          </ul>
+        </div>
+
+        <div className="flex flex-col gap-0.5">
+          <a href="https://github.com/lijuuu/Logito" target="_blank" rel="noopener noreferrer"
+             className="inline-block py-1.5 -my-1.5 text-sm lowercase font-medium text-[#1a1a1a]">
+            logito — a log ingestion platform
+          </a>
+          <a href="https://github.com/lijuuu/Logito" target="_blank" rel="noopener noreferrer"
+             className="inline-block py-1.5 -my-1.5 text-xs text-[#444444] lowercase">
+            source code: github.com/lijuuu/logito
+          </a>
+          <p className="text-xs text-[#6b6b6b] lowercase leading-relaxed max-w-lg">
+            go, gin, react, typescript, postgres, elasticsearch, mongodb
+          </p>
+          <ul className="flex flex-col gap-0.5 mt-1">
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>ingestion path: a batcher flushing on size or a timer, a worker pool with retries and backoff writing to postgres via copy, object pools and gc tuning to cut allocation overhead, and a mongo dead-letter queue for anything invalid or timed out instead of dropping it</span>
+            </li>
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>a separate query service indexes postgres into elasticsearch, gated behind a real cluster health check so it backs off instead of indexing into a degraded cluster, with manual dlq reprocessing back into postgres</span>
+            </li>
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>frontend: react + typescript, with a near-live view of the log stream drawn straight onto a canvas over a websocket feed, color-coded by level</span>
+            </li>
+            <li className="flex gap-1.5 text-[13px] text-[#444444] lowercase leading-relaxed max-w-2xl">
+              <span aria-hidden="true">-</span>
+              <span>load-tested on a resource-capped setup matching its own compose limits: scaling to ~50-55k logs/sec at batch size 200, zero failures</span>
             </li>
           </ul>
         </div>
