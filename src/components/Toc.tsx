@@ -66,8 +66,7 @@ export default function Toc({ content }: { content: string }) {
   if (items.length < 3) return null;
 
   return (
-    <nav className="hidden xl:block fixed right-8 top-24 w-48 text-[12px] leading-relaxed lowercase">
-      <p className="text-[#6b6b6b] mb-3">on this page</p>
+    <nav className="hidden xl:block fixed right-8 top-24 w-48 max-h-[65vh] overflow-y-auto text-[12px] leading-relaxed lowercase [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
       <ul className="flex flex-col gap-1.5">
         {items.map((h) => (
           <li key={h.id} style={{ paddingLeft: h.level === 3 ? "12px" : "0" }}>
